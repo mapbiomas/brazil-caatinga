@@ -1,0 +1,16 @@
+src/dados/*
+!src/dados/.gitkeep
+src/anotações_col9_2024.txt
+src/tarefas_para_col8_2023.txt
+src/testes
+src/testes/*
+src/utils
+src/utils/*
+src/corregir_areas/*
+src/configure_account_projects_ee.py
+src/gee_tools.py
+src/filterOlds
+src/dados/feature_select_col10/*
+src/dados/global_tables/*
+src/dados/acc/*
+src/dados/feature_select_col10/*
