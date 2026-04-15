@@ -1,0 +1,1 @@
+https://code.earthengine.google.com/?scriptPath=users%2Fmapbiomas%2Fintegration%3Amapbiomas-integration-filter.js
