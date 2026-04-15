@@ -1,0 +1,31 @@
+as amostras feitas com colect_ROIs_fromGrade_with_Normalize_Spectral_infoV2
+    tomaram como base o mapa de sentinel e as amostras de Agricultura da coleção 9 
+    os pontos foram reajustados para as quantidades 
+        'lsPtos': [1000, 2000, 1000, 1500, 1500, 1000, 1500, 1000],
+
+
+
+
+
+alterações no filtro 
+    - corregir erros de iluminação da versão 4 com a versão 1
+    -filtrar o campo do S2 do 2016 com a savana do Col9 e add layer Grassland e Floresta colect_ROIs_fromGrade_with_Normalize_Spectral_infoV2
+    -addicionar a floresta aucente do S2 com a floresta da col 9 com um erode filter
+    -toda estrada do S2 com 21 vai para a classe 25
+
+
+sequencia de filtros
+    filtro Gap com a coleção 9 do landsat, salvo por versão map classificado
+        'projects/mapbiomas-workspace/AMOSTRAS/col9/CAATINGA/S2/POS-CLASS/Gap-fill'   
+    filtro para recuperar as florestas que foram omitidas na classificação
+        'projects/mapbiomas-workspace/AMOSTRAS/col9/CAATINGA/S2/POS-CLASS/toExport'
+    filtro corregir a comição de mosaico de uso ou savana por variação na iluminosidade
+    do mosaico só para a veersão 4
+        'projects/mapbiomas-workspace/AMOSTRAS/col9/CAATINGA/S2/POS-CLASS/ilumination'
+    filtro para corregir a variação da classe Campo e trazer o afloramento, também 
+    foi utilizado para corregir o primeiro ano 
+        'projects/mapbiomas-workspace/AMOSTRAS/col9/CAATINGA/S2/POS-CLASS/grass_Aflor'
+    
+
+
+// falta integrar os dados de restinga 

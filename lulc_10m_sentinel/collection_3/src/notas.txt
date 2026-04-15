@@ -1,0 +1,102 @@
+link com as contas de mapbiomas 
+https://docs.google.com/spreadsheets/d/12W9jelblCCtF9xl9FVa_udPf6L4eeFIqpVHubEiNM7Y/edit?usp=sharing
+
+
+uso do filtro de trajetoria 
+https://docs.google.com/presentation/d/1c7P10TGL4wLRBhe3ML02RrwCgLO1my-LhPwBQg6Ln8w/edit#slide=id.g2d9630a10e1_0_105
+scripts de uso 
+https://code.earthengine.google.com/8106e44e3019ef621e9b527b4df64769
+
+
+
+códigos para mostrar os asset dentro o folder 
+earthengine ls -r projects/mapbiomas-public/assets/brazil/lulc
+
+
+lstBandas 
+know bands names Index 123
+   ['blue_median', 'green_median', 'red_median', 'nir_median', 'swir1_median', 'swir2_median', 'blue_median_dry', 'green_median_dry', 'red_median_dry', 'nir_median_dry', 'swir1_median_dry', 'swir2_median_dry', 'blue_median_wet', 'green_median_wet', 'red_median_wet', 'nir_median_wet', 'swir1_median_wet', 'swir2_median_wet', 'evi_median', 'evi_median_wet', 'evi_median_dry', 'ndvi_median', 'ndvi_median_wet', 'ndvi_median_dry', 'ratio_median', 'ratio_median_wet', 'ratio_median_dry', 'rvi_median', 'rvi_median_wet', 'rvi_median_1', 'ndwi_median', 'ndwi_median_wet', 'ndwi_median_dry', 'awei_median', 'awei_median_wet', 'awei_median_dry', 'iia_median', 'iia_median_wet', 'iia_median_dry', 'gcvi_median', 'gcvi_median_wet', 'gcvi_median_dry', 'gemi_median', 'gemi_median_wet', 'gemi_median_dry', 'cvi_median', 'cvi_median_wet', 'cvi_median_dry', 'gli_median', 'gli_median_wet', 'gli_median_dry', 'shape_median', 'shape_median_wet', 'shape_median_dry', 'afvi_median', 'afvi_median_wet', 'afvi_median_dry', 'avi_median', 'avi_median_wet', 'avi_median_dry', 'bsi_median', 'bsi_median_1', 'bsi_median_2', 'brba_median', 'brba_median_wet', 'brba_median_dry', 'dswi5_median', 'dswi5_median_wet', 'dswi5_median_dry', 'lswi_median', 'lswi_median_wet', 'lswi_median_dry', 'mbi_median', 'mbi_median_wet', 'mbi_median_dry', 'ui_median', 'ui_median_wet', 'ui_median_dry', 'ri_median', 'ri_median_wet', 'ri_median_dry', 'osavi_median', 'osavi_median_wet', 'osavi_median_dry', 'nddi_median', 'nddi_median_wet', 'nddi_median_dry', 'ndmi_median', 'ndmi_median_wet', 'ndmi_median_dry', 'wetness_median', 'wetness_median_wet', 'wetness_median_dry', 'brightness_median', 'brightness_median_wet', 'brightness_median_dry', 'gvmi_median', 'gvmi_median_wet', 'gvmi_median_dry', 'nir_median_contrast', 'red_median_contrast', 'nir_median_dry_contrast', 'red_median_dry_contrast', 'slope', 'hillshade', 'ndbi_median', 'ndbi_median_wet', 'ndbi_median_dry', 'msavi_median', 'msavi_median_wet', 'msavi_median_dry', 'gsavi_median', 'gsavi_median_wet', 'gsavi_median_dry', 'nbr_median', 'nbr_median_wet', 'nbr_median_dry', 'ndti_median', 'ndti_median_wet', 'ndti_median_dry', 'co2flux_median', 'co2flux_median_wet', 'co2flux_median_dry']
+
+
+calculo das bordas pernambuco 
+https://code.earthengine.google.com/25a9d771fcbecfce0246335126f5113e
+# vegetação secundaria
+
+projects/mapbiomas-public/assets/brazil/lulc/collection9/mapbiomas_collection90_deforestation_secondary_vegetation_v1
+
+## 
+https://code.earthengine.google.com/7039be27d0ee3c21c798c70d2845ff11
+
+
+sequencias de filtros 
+filter Gap-fil >> Spatial >> Temporal J3 >> TemporalA J3 >> Temporal J4 >> TemporalA J4 
+>> Temporal J5 >> TemporalA J5 >> Spatial_int >> Frequency >> Spatial All  
+
+
+
+
+incluir novos indices 
+Minns, Charles K.; Cairns, Victor W.; Randall, Robert G.; Moore, James E. . (1994). An Index of Biotic Integrity (IBI) for Fish Assemblages in the Littoral Zone of Great Lakes' Areas of Concern. Canadian Journal of Fisheries and Aquatic Sciences, 51(8), 1804–1822.                    doi:10.1139/f94-183 
+
+
+Nomarlized Difference Bare Land Index  NBLI (RED-TIR)/(RED + TIR)
+enhanced built-up and bare land index (EBBI)  novo indice
+normalized difference built-up index (NDBI)   novo indice 
+Soil-Adjusted Vegetation Index (SAVI)
+Urban Index (UI)  
+ 
+ 
+s-syakur, A.R.; Adnyana, I.W.; Arthana, I.W.; Nuarsa, I.W. Enhanced Built-Up and Bareness Index (EBBI)
+for Mapping Built-Up and Bare Land in an Urban Area. Remote Sens. 2012, 4, 2957–2970. [CrossRef]
+19. Jensen, J.R. Introductory Digital Image Processing: A Remote Sensing Perspective; Prentice Hall: Toronto, ON,
+Canada, 2005.
+20. Xian, G.; Homer, 
+
+normalized difference vegetation index (NDVI)
+enhanced vegetation index (EVI)
+ 
+ 
+Tucker, C.J. Red and photographic infrared linear combinations for monitoring vegetation. Remote Sens. Environ. 1979, 8, 127–150. [https://www.sciencedirect.com/science/article/abs/pii/0034425779900130?via%3Dihub]
+9. Jiang, Z.; Huete, A.R.; Didan, K.; Miura, T. Development of a two-band Enhanced Vegetation Index without a blue band. Remote Sens. Environ. 2008, 112, 3833–3845. [https://www.sciencedirect.com/science/article/abs/pii/S0034425708001971?via%3Dihub]
+
+
+
+embedding fields 
+Artigos científicos:
+
+    "Representation Learning with Contrastive Predictive Coding" (https://arxiv.org/abs/1905.09276): Este artigo apresenta o Contrastive Predictive Coding (CPC), uma técnica de aprendizado auto supervisionado que pode ser usada para treinar autoencoders.
+    "Deep Convolutional Autoencoders for Image Denoising" (https://www.cs.toronto.edu/~vinod/papers/autoencoder.pdf): Este artigo explora o uso de autoencoders convolucionais para remover ruído de imagens, demonstrando sua capacidade de aprender representações robustas.
+    "Variational Autoencoders" (https://arxiv.org/abs/1312.6114): Este artigo introduz os Autoencoders Variacionais (VAEs), uma abordagem que permite gerar novas amostras a partir do espaço de embeddings.
+
+
+    Projetos no GitHub:
+
+    "Autoencoder in PyTorch" (https://github.com/L1aoXingyu/Autoencoder-in-PyTorch): Este repositório contém implementações de diferentes tipos de autoencoders (básico, convolucional, variacional) usando o framework PyTorch.
+    "TensorFlow Autoencoder" (https://github.com/jtoy/tensorflow-autoencoder): Este repositório oferece exemplos de como construir e treinar autoencoders com TensorFlow, incluindo exemplos para diferentes tarefas.
+    "Keras Autoencoder Examples" (https://github.com/keras-team/keras/tree/master/examples/conv_autoencoder): Este repositório oficial do Keras contém exemplos de autoencoders convolucionais para diferentes aplicações, como remoção de ruído e compressão de imagens.
+
+
+esse é o script da Mata Atlântica que exporta as amostras treinadas com Embeddings:
+https://code.earthengine.google.com/4de5a4a23f95a53524060515528b6c77
+esse é o script da Mata Atlântica que classifica 1 região com Embeddings e exporta com RF e GTB:
+https://code.earthengine.google.com/9d6a173ed7bda0acd498e6d3a96813af
+
+exemplo mataatlantica 
+https://code.earthengine.google.com/9d6a173ed7bda0acd498e6d3a96813af
+
+comparando os dois mosaicos de embedding na Caatinga
+https://code.earthengine.google.com/f2b98fdbc4e96cc732bfc4f29c5f39a5
+
+apresentação mapbiomas 
+https://docs.google.com/presentation/d/1dlvrmkEo61mByQgLGZyAduVXspGHVUq29nQ94YRZE6Q/edit?slide=id.g328363c0041_0_111#slide=id.g328363c0041_0_111
+
+
+drive do ATBD 
+ https://drive.google.com/drive/folders/18Qrc2bVh4gg1rffzgmhNLRXCOxPlE_-p?usp=sharing
+
+doc do factsheet geral 
+ https://docs.google.com/presentation/d/1mFJfsLl_uJ119f7E7YRq-Emo4gtkDIU2/edit?slide=id.p8#slide=id.p8
+
+
+ Mapa antropico por decada 
+ https://code.earthengine.google.com/3ee8e5665d40fd6c69d0f08125163967

@@ -1,0 +1,1885 @@
+{
+    "7754": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.968503937007874
+        },
+        "2017": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9296875
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.983739837398374
+        },
+        "2019": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.8925619834710744
+        },
+        "2020": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9435483870967742
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9834710743801653
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9672131147540983
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9583333333333334
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9621848739495799
+        },
+        "2025": []
+    },
+    "7691": {
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9513888888888888
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9507042253521126
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9928571428571429
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9854014598540146
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.943609022556391
+        },
+        "2025": []
+    },
+    "7581": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.968503937007874
+        },
+        "2017": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9296875
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.983739837398374
+        },
+        "2019": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.8925619834710744
+        },
+        "2020": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9435483870967742
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9834710743801653
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9672131147540983
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9583333333333334
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9621848739495799
+        },
+        "2025": []
+    },
+    "7625": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9935897435897436
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9865771812080537
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9932885906040269
+        },
+        "2025": []
+    },
+    "7584": {
+        "2016": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9522058823529411
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2018": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9962264150943396
+        },
+        "2019": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9734848484848485
+        },
+        "2020": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.951310861423221
+        },
+        "2021": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9656488549618321
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9694656488549618
+        },
+        "2023": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9692307692307692
+        },
+        "2024": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9087378640776699
+        },
+        "2025": []
+    },
+    "751": {
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9511494252873564
+        },
+        "2025": []
+    },
+    "7614": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9421768707482994
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9885931558935361
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.993006993006993
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9965034965034965
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9891304347826086
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9816849816849816
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9413919413919414
+        },
+        "2025": []
+    },
+    "752": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9515570934256056
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9966101694915255
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9829351535836177
+        },
+        "2020": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9725085910652921
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9930795847750865
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9825783972125436
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9718804920913884
+        },
+        "2025": []
+    },
+    "7616": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.98828125
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9961538461538462
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9733606557377049
+        },
+        "2025": []
+    },
+    "745": {
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9811320754716981
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.978021978021978
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9882352941176471
+        },
+        "2025": []
+    },
+    "7424": {
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9929577464788732
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9929078014184397
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9929078014184397
+        },
+        "2025": []
+    },
+    "773": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9828326180257511
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9867256637168141
+        },
+        "2024": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9376443418013857
+        },
+        "2025": []
+    },
+    "7612": {
+        "2016": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.975
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9884393063583815
+        },
+        "2018": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9661971830985916
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9801699716713881
+        },
+        "2020": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9914285714285714
+        },
+        "2021": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.997093023255814
+        },
+        "2022": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9358600583090378
+        },
+        "2023": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9882352941176471
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9546120058565154
+        },
+        "2025": []
+    },
+    "7613": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9961538461538462
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9921875
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.996
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9744597249508841
+        },
+        "2025": []
+    },
+    "7618": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9914529914529915
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9941520467836257
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.998533724340176
+        },
+        "2025": []
+    },
+    "7561": {
+        "2016": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9304347826086956
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9795918367346939
+        },
+        "2018": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9418604651162791
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9970326409495549
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9879154078549849
+        },
+        "2025": []
+    },
+    "755": {
+        "2018": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9556313993174061
+        },
+        "2019": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9413793103448276
+        },
+        "2020": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9545454545454546
+        },
+        "2021": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9858156028368794
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9574468085106383
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9463327370304114
+        },
+        "2025": []
+    },
+    "7617": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9971181556195965
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9883720930232558
+        },
+        "2025": []
+    },
+    "7564": {
+        "2016": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9539641943734015
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9792746113989638
+        },
+        "2018": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9871794871794872
+        },
+        "2019": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9665809768637532
+        },
+        "2020": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9528795811518325
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9945945945945946
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9361997226074896
+        },
+        "2025": []
+    },
+    "761111": {
+        "2016": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9591836734693877
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9404761904761905
+        },
+        "2018": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9497041420118343
+        },
+        "2019": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9588235294117647
+        },
+        "2020": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9464285714285714
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9606060606060606
+        },
+        "2022": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.963302752293578
+        },
+        "2023": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9907692307692307
+        },
+        "2025": []
+    },
+    "761112": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2019": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9850746268656716
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2025": []
+    },
+    "7741": {
+        "2018": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.943127962085308
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9619047619047619
+        },
+        "2022": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9227053140096618
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9830097087378641
+        },
+        "2025": []
+    },
+    "7422": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9848101265822785
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9845758354755784
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9973958333333334
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9867724867724867
+        },
+        "2022": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9894736842105263
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9842105263157894
+        },
+        "2025": []
+    },
+    "76116": {
+        "2016": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9164733178654292
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.990632318501171
+        },
+        "2019": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9437939110070258
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9572446555819477
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9396863691194209
+        },
+        "2025": []
+    },
+    "7761": {
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9152298850574713
+        },
+        "2025": []
+    },
+    "7671": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9429223744292238
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9640449438202248
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9726651480637813
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9509569377990431
+        },
+        "2025": []
+    },
+    "7615": {
+        "2017": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.99079754601227
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9937304075235109
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9870967741935484
+        },
+        "2025": []
+    },
+    "7411": {
+        "2016": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": null,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.8904109589041096
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9447513812154696
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9138888888888889
+        },
+        "2025": []
+    },
+    "7764": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9591836734693877
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9885321100917431
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9930875576036866
+        },
+        "2025": []
+    },
+    "757": {
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9890909090909091
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 1.0
+        },
+        "2025": []
+    },
+    "771": {
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9917695473251029
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9737991266375546
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9469026548672567
+        },
+        "2025": []
+    },
+    "7712": {
+        "2016": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9698996655518395
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9795918367346939
+        },
+        "2018": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9896907216494846
+        },
+        "2019": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9551724137931035
+        },
+        "2020": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9861111111111112
+        },
+        "2021": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9754385964912281
+        },
+        "2022": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9893617021276596
+        },
+        "2023": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9714285714285714
+        },
+        "2024": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9602169981916817
+        },
+        "2025": []
+    },
+    "766": {
+        "2018": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9549180327868853
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9897119341563786
+        },
+        "2020": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9541666666666667
+        },
+        "2025": []
+    },
+    "7746": {
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.974308300395257
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.978
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9818548387096774
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9814814814814815
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9523809523809523
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.8502109704641351
+        },
+        "2025": []
+    },
+    "753": {
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9919137466307277
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.978494623655914
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9918478260869565
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9244755244755245
+        },
+        "2025": []
+    },
+    "764": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9550561797752809
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9944289693593314
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9255474452554745
+        },
+        "2025": []
+    },
+    "7541": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.920997920997921
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9624060150375939
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9661016949152542
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9827586206896551
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9847036328871893
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9536679536679536
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.951819075712881
+        },
+        "2025": []
+    },
+    "7721": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9368635437881874
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9859437751004017
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.952
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9798792756539235
+        },
+        "2020": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9550102249488752
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9665271966527197
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9747368421052631
+        },
+        "2025": []
+    },
+    "772": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9356060606060606
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9961685823754789
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9845559845559846
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9882352941176471
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9763779527559056
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.996031746031746
+        },
+        "2025": []
+    },
+    "7619": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9941634241245136
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.994059405940594
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9842209072978304
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9939759036144579
+        },
+        "2025": []
+    },
+    "7443": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9662162162162162
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 12,
+            "acc": 1.0
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9948364888123924
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.993103448275862
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9828178694158075
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9946996466431095
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9982300884955753
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9928698752228164
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9740376007162042
+        },
+        "2025": []
+    },
+    "765": {
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.951048951048951
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9349736379613357
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9519572953736655
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.947227191413238
+        },
+        "2025": []
+    },
+    "7544": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9656862745098039
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9920760697305864
+        },
+        "2018": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9502332814930016
+        },
+        "2021": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 75,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9820554649265906
+        },
+        "2023": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9536423841059603
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9420168067226891
+        },
+        "2025": []
+    },
+    "7438": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9792746113989638
+        },
+        "2017": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 8,
+            "clf__max_iter": 60,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9913344887348353
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9927140255009107
+        },
+        "2020": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9798165137614679
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9887850467289719
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9887640449438202
+        },
+        "2025": []
+    },
+    "763": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9500713266761769
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9698275862068966
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9692653673163418
+        },
+        "2025": []
+    },
+    "7591": {
+        "2016": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9488636363636364
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9828571428571429
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9883720930232558
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9820359281437125
+        },
+        "2022": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9820359281437125
+        },
+        "2025": []
+    },
+    "7592": {
+        "2024": {
+            "clf__learning_rate": 0.05,
+            "clf__max_depth": 16,
+            "clf__max_iter": 90,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9080459770114943
+        },
+        "2025": []
+    },
+    "7622": {
+        "2016": {
+            "clf__learning_rate": 0.01,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9675925925925926
+        },
+        "2017": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 8,
+            "clf__max_iter": 100,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9879518072289156
+        },
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.988
+        },
+        "2020": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9850746268656716
+        },
+        "2021": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9918032786885246
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": null,
+            "clf__max_iter": 35,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.9956709956709957
+        },
+        "2025": []
+    },
+    "746": {
+        "2019": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 12,
+            "acc": 0.994475138121547
+        },
+        "2024": {
+            "clf__learning_rate": 0.1,
+            "clf__max_depth": 16,
+            "clf__max_iter": 25,
+            "clf__max_leaf_nodes": 8,
+            "acc": 0.9736477115117892
+        },
+        "2025": []
+    }
+}
