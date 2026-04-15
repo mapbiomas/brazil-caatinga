@@ -1,0 +1,22 @@
+{
+    "optimal_number_of_features": 17,
+    "features": [
+        "afvi_median_dry",
+        "avi_median_mean",
+        "awei_median",
+        "awei_median_dry",
+        "awei_median_mean",
+        "brba_median_dry",
+        "brba_median_wet",
+        "cvi_median",
+        "cvi_median_wet",
+        "ndvi_median_wet",
+        "npv_median_wet",
+        "osavi_median_stdDev",
+        "pri_median",
+        "red_median_wet",
+        "rvi_median_wet",
+        "soil_median",
+        "ui_median_stdDev"
+    ]
+}
