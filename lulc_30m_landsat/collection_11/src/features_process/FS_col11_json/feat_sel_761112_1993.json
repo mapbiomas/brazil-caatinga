@@ -1,0 +1,22 @@
+{
+    "optimal_number_of_features": 17,
+    "features": [
+        "awei_median",
+        "awei_median_mean",
+        "brba_median_dry",
+        "brba_median_wet",
+        "brightness_median",
+        "green_median_dry",
+        "hillshade",
+        "ndti_median",
+        "ndti_median_dry",
+        "pri_median_dry",
+        "rvi_median_dry",
+        "soil_median",
+        "soil_median_dry",
+        "spri_median_dry",
+        "swir1_median",
+        "wetness_median",
+        "wetness_median_dry"
+    ]
+}

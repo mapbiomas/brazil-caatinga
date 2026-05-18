@@ -1,0 +1,29 @@
+{
+    "optimal_number_of_features": 24,
+    "features": [
+        "afvi_median_dry",
+        "avi_median_mean",
+        "awei_median_stdDev",
+        "awei_median_wet",
+        "brba_median_wet",
+        "brightness_median_wet",
+        "bsi_median_mean",
+        "gcvi_median_mean",
+        "gcvi_median_stdDev",
+        "gemi_median_wet",
+        "gli_median_wet",
+        "lai_median_dry",
+        "ndfia_median_stdDev",
+        "ndti_median_dry",
+        "ndti_median_wet",
+        "nir_median",
+        "nir_median_wet",
+        "pri_median",
+        "shade_median_dry",
+        "soil_median_wet",
+        "swir2_median_dry",
+        "ui_median_mean",
+        "ui_median_stdDev",
+        "wetness_median"
+    ]
+}
