@@ -1,1 +1,0 @@
-/home/superuser/Dados/mapbiomas/dev_collection_10/src/showmaps/showClassificationSlice.js

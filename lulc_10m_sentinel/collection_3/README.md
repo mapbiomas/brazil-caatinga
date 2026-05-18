@@ -1,3 +1,5 @@
+# dev_col2_Sentinel_MB
+aqui é um repositorio para tratar o desenvolvimento da coleção Sentinel de Mapbiomas
 # Land Use and Land Cover Mapping — Caatinga Biome (Sentinel-2, Collection 3)
 
 This repository contains the complete workflow and scripts used for the annual mapping of land use and land cover in the Caatinga biome using **Sentinel-2** imagery at **10 m** spatial resolution. The process is based on remote sensing techniques, utilizing the **Google Earth Engine (GEE)** platform and **Machine Learning** algorithms, covering the time series from **2016 to 2025** (10 years).
