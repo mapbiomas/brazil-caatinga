@@ -8,34 +8,39 @@ palette_vis[13] = '#BEDC9C';
 // ─── Visualização ─────────────────────────────────────────────────────────────
 var visualizar = {
     visclass:  { min: 0, max: 75, palette: palette_vis, format: 'png' },
-    visMosaic: { min: 0.012, max: 0.22, bands: ['red', 'green', 'blue'] }
+    visMosaic: { min: 300, max: 2100, bands: ['red_median', 'green_median', 'blue_median'] }
 };
 
 // ─── Parâmetros ───────────────────────────────────────────────────────────────
 var param = {
+    // Coleções anteriores usadas como fundo (Map71–Map100: single-image; Map110: IC → carregado como imgCol11)
     'colecoes_ant': {
         'Map71':  'projects/mapbiomas-public/assets/brazil/lulc/collection7_1/mapbiomas_collection71_integration_v1',
         'Map80':  'projects/mapbiomas-public/assets/brazil/lulc/collection8/mapbiomas_collection80_integration_v1',
         'Map90':  'projects/mapbiomas-public/assets/brazil/lulc/collection9/mapbiomas_collection90_integration_v1',
         'Map100': 'projects/mapbiomas-public/assets/brazil/lulc/collection10/mapbiomas_brazil_collection10_integration_v2',
+        'Map110': 'projects/mapbiomas-brazil/assets/LAND-COVER/COLLECTION-11/INTEGRATION/classification-ft',
     },
-    assetclass: 'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/Classifier/Classify_fromEEMV1joined',
+    col11_version: '0-4-12-spt-4',
+    // Classificação inicial Sentinel (joined pré-filtros)
+    assetclass: 'projects/mapbiomas-brazil/assets/LAND-COVER-10M/COLLECTION-3/GENERAL/CAATINGA/POS-CLASS/joined',
     asset_filters: {
-        'Gap-fill':      'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/Gap-fill',
-        'Spatial Sieve': 'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/Spatials_sieve',
-        'Temporal A':    'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/TemporalAnt',
-        'Frequency':     'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/Frequency',
-        'Temporal CC':   'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/TemporalbyCC',
-        'Estabilidade':  'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/EstabilidadeCols',
-        'Corr. Pontuais':'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/correcoes',
-        'Class. Final':  'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/toExport',
+        'map_class': 'projects/mapbiomas-brazil/assets/LAND-COVER-10M/COLLECTION-3/GENERAL/CAATINGA/POS-CLASS/to_export',
+        'Gap-fill':      'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/Gap-fill',
+        'Spatial Sieve': 'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/Spatials_sieve',
+        'Temporal A':    'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/Temporal_Nat_Ant',
+        'Frequency':     'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/Frequency',
+        'Temporal CC':   'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/TemporalbyCC',
+        'correction_integ': 'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/correcoes',
+        'Class. Final':  'projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/S2/POS-CLASS/toExport',
     },
-    assetIm:    'LANDSAT/COMPOSITES/C02/T1_L2_32DAY',
+    asset_mosaic_sentinelp2: 'projects/nexgenmap/MapBiomas2/SENTINEL/mosaics-3',
+    asset_mosaic_sentinelp1: 'projects/mapbiomas-mosaics/assets/SENTINEL/BRAZIL/mosaics-3',
     assetBacia: 'projects/mapbiomas-workspace/AMOSTRAS/col9/CAATINGA/bacias_hidrografica_caatinga_49_regions',
     bandas:     ['red', 'green', 'blue', 'nir', 'swir1', 'swir2'],
-    yearMin:    1985,
+    yearMin:    2016,
     yearMax:    2025,
-    LAYERS:     ['Classificação', 'Gap-fill', 'Spatial Sieve', 'Temporal A', 'Frequency', 'Temporal CC', 'Estabilidade', 'Corr. Pontuais', 'Class. Final'],
+    LAYERS:     ['Classificação', 'Gap-fill', 'Spatial Sieve', 'Temporal A', 'Frequency', 'Temporal CC', 'correction_integ', 'Class. Final', 'map_class'],
     listaNameBacias: [
         'all', '765', '7544', '7541', '7411', '746', '7591',
         '7592', '761111', '761112', '7612', '7613', '7614',
@@ -46,18 +51,18 @@ var param = {
         '766', '753', '764', '7619', '7443', '7438', '763',
         '7622', '7746'
     ],
-    versions:     ['1', '2', '3', '4', '5'],
-    numero_class: [7, 10],
-    assetBiomas:  'projects/mapbiomas-workspace/AUXILIAR/biomas_IBGE_250mil'
+    versions:     ['5', '7'],
+    numero_class: [7],
+    assetBiomas:  'projects/mapbiomas-workspace/AUXILIAR/bioma_2025_e250k_5kbuffer'
 };
 
 // ─── Estado ───────────────────────────────────────────────────────────────────
-var year_show = 2024;
+var year_show = 2025;
 
 // Estado independente por mapa; mutado pelos widgets de cada bloco
-var esq = { layer: 'Classificação', version: '1', numclass: 7 };
-var dir = { layer: 'Classificação', version: '2', numclass: 7 };
-var colecao_fundo = 'Map100';  // coleção de fundo do mapa esquerdo (Camada 1)
+var esq = { layer: 'map_class', version: '7', numclass: 7 };
+var dir = { layer: 'Gap-fill',      version: '5', numclass: 7 };
+var colecao_fundo = 'Map110';  // coleção de fundo do mapa esquerdo (Camada 1)
 
 // bacias disponíveis e quais estão selecionadas
 var all_basins = [
@@ -89,17 +94,18 @@ var borda_caatinga = ee.Image().byte()
     .paint(shp_caatinga, 1, 2)
     .visualize({ palette: ['FF0000'], opacity: 0.9 });
 
-var mosaic_norm = ee.ImageCollection(param.assetIm)
-    .filterBounds(shp_bacias_all.geometry())
-    .select(param.bandas);
-
 var ic_class  = ee.ImageCollection(param.assetclass);
+
+// Col11: IC → carregado como mosaic estático (ee.Image() falha em IC path)
+var imgCol11 = ee.ImageCollection(param.colecoes_ant['Map110'])
+    .filter(ee.Filter.eq('version', param.col11_version))
+    .mosaic();
 
 // ─── Mapas ────────────────────────────────────────────────────────────────────
 var Map_esq = ui.Map({ style: { border: '2px solid #1a237e' } });
 var Map_dir = ui.Map({ style: { border: '2px solid #1b5e20', stretch: 'both' } });
 Map_esq.setOptions('SATELLITE');
-Map_dir.setOptions('SATELLITE');
+// Map_dir.setOptions('SATELLITE');
 
 var linker = ui.Map.Linker([Map_esq, Map_dir]);
 var splitPanel = ui.SplitPanel({
@@ -148,7 +154,7 @@ function buildPixelChart(panel, imgAllBands, coords, sideLabel) {
 
     var point = ee.Geometry.Point([coords.lon, coords.lat]);
     imgAllBands.reduceRegion({
-        reducer: ee.Reducer.first(), geometry: point, scale: 30, maxPixels: 1e6
+        reducer: ee.Reducer.first(), geometry: point, scale: 10, maxPixels: 1e6
     }).evaluate(function(vals) {
         panel.clear();
         if (!vals) {
@@ -205,21 +211,20 @@ function buildCorrecoesIc(version_str) {
 }
 
 function addPosClassLayerToMap(mapObj, state_obj, banda, mask_bacia, my_gen, sel_list, is_all, onDone) {
-    var isCC   = (state_obj.layer === 'Temporal CC' || state_obj.layer === 'Estabilidade' || state_obj.layer === 'Corr. Pontuais' || state_obj.layer === 'Class. Final');
-    var idProp = isCC ? 'id_bacia' : 'id_bacias';
+    var isCC   = (state_obj.layer === 'Temporal CC' || state_obj.layer === 'Estabilidade' || state_obj.layer === 'Corr. Pontuais' || state_obj.layer === 'Class. Final' || state_obj.layer === 'map_class');
+    var idProp = 'id_bacias';
     var ic;
     if (state_obj.layer === 'Corr. Pontuais') {
         ic = buildCorrecoesIc(state_obj.version);
-        if (!is_all) { ic = ic.filter(ee.Filter.inList('id_bacia', sel_list)); }
+        if (!is_all) { ic = ic.filter(ee.Filter.inList('id_bacias', sel_list)); }
     } else {
         ic = ee.ImageCollection(param.asset_filters[state_obj.layer])
             .filter(ee.Filter.eq('version', parseInt(state_obj.version, 10)));
-        if (!isCC) {
-            ic = ic.filter(ee.Filter.eq('num_class', state_obj.numclass));
-        }
+        
         if (!is_all) {
             ic = ic.filter(ee.Filter.inList(idProp, sel_list));
         }
+        print("Layer ==> " + state_obj.layer, ic);
     }
 
     var label = state_obj.layer + ' v' + state_obj.version + (isCC ? '' : ' nc' + state_obj.numclass);
@@ -227,7 +232,7 @@ function addPosClassLayerToMap(mapObj, state_obj, banda, mask_bacia, my_gen, sel
     ic.size().evaluate(function(n) {
         if (_gen !== my_gen) return;
         if (n > 0) {
-            mapObj.addLayer(ic.max().select(banda).updateMask(mask_bacia),
+            mapObj.addLayer(ic.select(banda).mosaic().updateMask(mask_bacia),
                             visualizar.visclass, label, true);
         } else {
             print('Aviso: ' + state_obj.layer +
@@ -238,7 +243,8 @@ function addPosClassLayerToMap(mapObj, state_obj, banda, mask_bacia, my_gen, sel
 }
 
 // ─── Mapa de nomes legíveis das coleções ──────────────────────────────────────
-var colNames = { 'Map71': 'Col7.1', 'Map80': 'Col8', 'Map90': 'Col9', 'Map100': 'Col10' };
+var colNames   = { 'Map71': 'Col7.1', 'Map80': 'Col8', 'Map90': 'Col9', 'Map100': 'Col10', 'Map110': 'Col11' };
+var colMaxYear = { 'Map71': 2022,    'Map80': 2023,   'Map90': 2024,   'Map100': 2024,    'Map110': 2025 };
 
 // ─── Cabeçalhos dinâmicos ─────────────────────────────────────────────────────
 var lbl_header_esq = ui.Label('', {
@@ -256,7 +262,7 @@ function headerText(side, st) {
             ? '◀ ' + (colNames[colecao_fundo] || colecao_fundo) + ' | Col.11 v' + st.version
             : 'Col. 11 v' + st.version + ' ▶';
     }
-    var isCC = (st.layer === 'Temporal CC' || st.layer === 'Estabilidade' || st.layer === 'Corr. Pontuais' || st.layer === 'Class. Final');
+    var isCC = (st.layer === 'Temporal CC' || st.layer === 'Estabilidade' || st.layer === 'Corr. Pontuais' || st.layer === 'Class. Final' || st.layer === 'map_class');
     var txt = st.layer + ' v' + st.version + (isCC ? '' : ' nc' + st.numclass);
     return side === 'esq' ? '◀ ' + txt : txt + ' ▶';
 }
@@ -274,7 +280,7 @@ function atualizar() {
     _gen++;
     var my_gen   = _gen;
     var banda    = 'classification_' + year_show;
-    var year_mos = year_show > 2024 ? 2024 : year_show;
+    var year_mos = year_show;
 
     var sel_list = getSelectedBasins();
     var is_all   = (sel_list.length === all_basins.length);
@@ -293,10 +299,14 @@ function atualizar() {
         .map(function(f) { return f.set('id_cod', 1); })
         .reduceToImage(['id_cod'], ee.Reducer.first());
 
-    var date_inic   = ee.Date.fromYMD(year_mos, 1, 1);
-    var mosaic_year = mosaic_norm
-        .filter(ee.Filter.date(date_inic, date_inic.advance(1, 'year')))
-        .median();
+    // Mosaico Sentinel: p1 para < 2024, p2 para >= 2024
+    var mosaicIC = year_mos < 2024
+        ? ee.ImageCollection(param.asset_mosaic_sentinelp1)
+        : ee.ImageCollection(param.asset_mosaic_sentinelp2);
+    var mosaic_year = mosaicIC
+        .filterBounds(shp_sel.geometry())
+        .filter(ee.Filter.eq('year', year_mos))
+        .mosaic();
 
     var bordas = ee.Image().byte()
         .paint(shp_sel, 1, 1)
@@ -320,19 +330,22 @@ function atualizar() {
 
     // ── Mapa de Fundo (esquerdo) ──────────────────────────────────────────────
     Map_esq.addLayer(mosaic_year, visualizar.visMosaic, 'Mosaico ' + year_show, true);
-    // Camada 1: coleção anterior selecionável
-    var map_fundo = ee.Image(param.colecoes_ant[colecao_fundo]);
+    // Camada 1: coleção anterior selecionável (Map110 é IC, demais são single-image)
+    var map_fundo = colecao_fundo === 'Map110'
+        ? imgCol11
+        : ee.Image(param.colecoes_ant[colecao_fundo]);
+    var bandaFundo = 'classification_' + Math.min(year_show, colMaxYear[colecao_fundo] || year_show);
     Map_esq.addLayer(
-        map_fundo.updateMask(mask_bacia).select(banda),
-        visualizar.visclass, colecao_fundo + ' ' + year_show, true
+        map_fundo.updateMask(mask_bacia).select(bandaFundo),
+        visualizar.visclass, (colNames[colecao_fundo] || colecao_fundo) + ' ' + year_show, true
     );
-    // Camada 2: Col11 versão selecionada ou filtro pós-class
+    // Camada 2: Classificação sentinel ou filtro pós-class
     if (esq.layer === 'Classificação') {
         var ic_esq = filterByVersion(ic_class, esq.version);
         if (!is_all) ic_esq = ic_esq.filter(ee.Filter.inList('id_bacias', sel_list));
         Map_esq.addLayer(
-            ic_esq.select(banda).max().updateMask(mask_bacia),
-            visualizar.visclass, 'Col11 v' + esq.version + ' ' + year_show, true
+            ic_esq.select(banda).mosaic().updateMask(mask_bacia),
+            visualizar.visclass, 'Class. v' + esq.version + ' ' + year_show, true
         );
         addEsqTop();
     } else {
@@ -345,8 +358,8 @@ function atualizar() {
     if (!is_all) ic_ref = ic_ref.filter(ee.Filter.inList('id_bacias', sel_list));
     if (dir.layer === 'Classificação') {
         Map_dir.addLayer(
-            ic_ref.select(banda).max().updateMask(mask_bacia),
-            visualizar.visclass, 'Col11 v' + dir.version + ' ' + year_show, true
+            ic_ref.select(banda).mosaic().updateMask(mask_bacia),
+            visualizar.visclass, 'Class. v' + dir.version + ' ' + year_show, true
         );
         addDirTop();
     } else {
@@ -357,9 +370,10 @@ function atualizar() {
     if (esq.layer === 'Classificação') {
         var ic_esq_chart = filterByVersion(ic_class, esq.version);
         if (!is_all) ic_esq_chart = ic_esq_chart.filter(ee.Filter.inList('id_bacias', sel_list));
-        img_esq_allbands = ic_esq_chart.max();
+        img_esq_allbands = ic_esq_chart.mosaic();
     } else {
-        var isCC_esq = (esq.layer === 'Temporal CC' || esq.layer === 'Estabilidade' || esq.layer === 'Corr. Pontuais' || esq.layer === 'Class. Final');
+        var isCC_esq = (esq.layer === 'Temporal CC' || esq.layer === 'Estabilidade' || esq.layer === 'Corr. Pontuais' || esq.layer === 'Class. Final' || esq.layer === 'map_class');
+        var idProp_esq = 'id_bacias';
         var ic_chart_esq;
         if (esq.layer === 'Corr. Pontuais') {
             ic_chart_esq = buildCorrecoesIc(esq.version);
@@ -372,17 +386,18 @@ function atualizar() {
             }
             if (!is_all) {
                 ic_chart_esq = ic_chart_esq.filter(
-                    ee.Filter.inList(isCC_esq ? 'id_bacia' : 'id_bacias', sel_list));
+                    ee.Filter.inList(idProp_esq, sel_list));
             }
         }
-        img_esq_allbands = ic_chart_esq.max();
+        img_esq_allbands = ic_chart_esq.mosaic();
     }
 
     // série temporal — mapa direito
     if (dir.layer === 'Classificação') {
-        img_dir_allbands = ic_ref.max();
+        img_dir_allbands = ic_ref.mosaic();
     } else {
-        var isCC_dir = (dir.layer === 'Temporal CC' || dir.layer === 'Estabilidade' || dir.layer === 'Corr. Pontuais' || dir.layer === 'Class. Final');
+        var isCC_dir = (dir.layer === 'Temporal CC' || dir.layer === 'Estabilidade' || dir.layer === 'Corr. Pontuais' || dir.layer === 'Class. Final' || dir.layer === 'map_class');
+        var idProp_dir = 'id_bacias';
         var ic_chart;
         if (dir.layer === 'Corr. Pontuais') {
             ic_chart = buildCorrecoesIc(dir.version);
@@ -395,10 +410,10 @@ function atualizar() {
             }
             if (!is_all) {
                 ic_chart = ic_chart.filter(
-                    ee.Filter.inList(isCC_dir ? 'id_bacia' : 'id_bacias', sel_list));
+                    ee.Filter.inList(idProp_dir, sel_list));
             }
         }
-        img_dir_allbands = ic_chart.max();
+        img_dir_allbands = ic_chart.mosaic();
     }
 
     if (_primeiraVez) {
@@ -421,9 +436,6 @@ function sectionLabel(txt, color) {
 }
 
 // ─── Bloco de controles por mapa ──────────────────────────────────────────────
-// Cada bloco tem seleção de camada, versão, nº classes e janela (quando aplicável).
-// Para o mapa esquerdo, "Classificação" = Col10; versão e nº classes ficam ocultos.
-// Para o mapa direito, "Classificação" = Col11 com versão selecionável.
 function makeSidePanel(side, state_obj, color, title) {
     var sel_layer = ui.Select({
         items:       param.LAYERS,
@@ -432,7 +444,7 @@ function makeSidePanel(side, state_obj, color, title) {
         style:       { stretch: 'horizontal', margin: '2px 0px' }
     });
 
-    var lbl_ver = ui.Label('Versão Col11:', { fontSize: '11px', color: '#555', margin: '4px 0px 1px 0px' });
+    var lbl_ver = ui.Label('Versão:', { fontSize: '11px', color: '#555', margin: '4px 0px 1px 0px' });
     var sel_ver = ui.Select({
         items:       param.versions,
         value:       state_obj.version,
@@ -488,7 +500,6 @@ function makeSidePanel(side, state_obj, color, title) {
 }
 
 // ─── Slider de ano ────────────────────────────────────────────────────────────
-// Aplica imediatamente ao arrastar; os demais controles só aplicam via "Aplicar".
 var lbl_ano_val = ui.Label(String(year_show), {
     fontWeight: 'bold', fontSize: '15px', color: '#4a148c',
     margin: '4px 10px 4px 6px', width: '44px'

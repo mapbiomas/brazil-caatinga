@@ -808,7 +808,7 @@ else:
     lstFeatAsset = []
 print("size of grade geral >> ", len(lstIdCode))
 # sys.exit()
-inicP = 0 # 0, 100
+inicP = 21 # 0, 100
 endP = 100   # 100, 200, 300, 600
 for cc, item in enumerate(lstIdCode[inicP:endP]):
     print(f"# {cc + 1 + inicP} loading geometry grade {item}")   

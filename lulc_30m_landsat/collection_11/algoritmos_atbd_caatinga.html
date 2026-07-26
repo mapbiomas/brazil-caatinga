@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algoritmos da classificação — ATBD Caatinga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEDF;        /* sertão paper */
+    --paper-2:#EDE5D2;
+    --ink:#2A2620;          /* dark bark */
+    --ink-soft:#5B5347;
+    --green:#1F6B3B;        /* caatinga wet / mapbiomas */
+    --olive:#7C8A4E;        /* dry foliage */
+    --ochre:#C1852B;        /* dry earth accent */
+    --sienna:#A6552F;       /* burnt clay (used rarely) */
+    --rule:#D5C9AE;
+    --forest:#1f8d49; --savana:#7dc975; --campo:#d6bc74; --pasto:#edde8e;
+    --display:"Fraunces",Georgia,serif;
+    --body:"Inter",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--paper-2) 1px,transparent 1px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+  /* ---------- hero ---------- */
+  header{padding:72px 0 40px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--green);margin:0 0 18px}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(38px,7vw,68px);
+    line-height:1.02;letter-spacing:-.01em;margin:0 0 20px;max-width:16ch}
+  h1 em{font-style:italic;color:var(--ochre)}
+  .lede{font-size:clamp(17px,2.2vw,20px);color:var(--ink-soft);max-width:60ch;margin:0}
+
+  /* pipeline flow (fork & merge) = the thesis */
+  .flow{margin:44px 0 4px;display:flex;align-items:stretch;gap:8px}
+  .f-end{align-self:center;border:1px solid var(--rule);background:#fff9ee;
+    border-radius:3px;padding:14px 16px;display:flex;flex-direction:column;gap:3px;min-width:150px}
+  .f-end.amostras{border-color:var(--ink-soft)}
+  .f-end.clf{border-color:var(--ochre);background:#fdf6e7}
+  .f-mid{display:flex;flex-direction:column;gap:16px;flex:1;min-width:0}
+  .f-lane{display:flex;align-items:center;gap:8px}
+  .box{flex:1;min-width:0;border:1px solid var(--rule);background:#fff9ee;
+    border-radius:3px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+  .box.sel{border-color:var(--green)}
+  .box.grid{border-color:var(--olive)}
+  .flow .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-soft)}
+  .flow .v{font-family:var(--display);font-size:20px;font-weight:600;line-height:1.04}
+  .flow .out{font-family:var(--mono);font-size:11px;color:var(--green);margin-top:3px}
+  .f-end.clf .out{color:var(--ochre)}
+  .clf-opts{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+  .opt{border:1px solid var(--rule);background:#fff;border-radius:3px;
+    padding:6px 11px;font-family:var(--display);font-size:15px;font-weight:600;line-height:1.1}
+  .opt.on{border-color:var(--ochre);box-shadow:inset 3px 0 0 var(--ochre)}
+  .opt .mini{display:block;font-family:var(--mono);font-size:9.5px;font-weight:400;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-top:3px}
+  .opt-or{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-soft);text-align:center}
+  .ar{font-size:19px;color:var(--ink-soft);flex:0 0 auto;line-height:1}
+  .pipe-note{font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    margin:16px 0 0;padding-left:2px;line-height:1.7}
+  .pipe-note b{color:var(--green);font-weight:500}
+  @media(max-width:720px){
+    .flow{flex-direction:column}
+    .f-end,.box{align-self:stretch}
+    .ar{display:none}
+    .f-mid{gap:10px}
+  }
+
+  /* ---------- plate ---------- */
+  .plate{padding:64px 0;border-bottom:1px solid var(--rule)}
+  .plate-head{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+  .roman{font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:.05em;
+    color:var(--ochre);border:1.5px solid var(--ochre);border-radius:50%;
+    width:40px;height:40px;display:grid;place-items:center;flex:0 0 auto}
+  .kind{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.4vw,40px);
+    line-height:1.05;letter-spacing:-.01em;margin:6px 0 4px}
+  h2 .full{display:block;font-family:var(--mono);font-size:13px;font-weight:400;
+    letter-spacing:.04em;color:var(--ink-soft);margin-top:8px;text-transform:none}
+  .desc{max-width:64ch;font-size:18px;margin:18px 0 6px}
+
+  /* specimen figure */
+  figure{margin:30px 0 8px;border:1px solid var(--rule);background:#fffbf2;
+    border-radius:4px;padding:22px 20px 16px;
+    box-shadow:0 1px 0 var(--rule),0 14px 30px -26px rgba(42,38,32,.5)}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule)}
+  figcaption b{color:var(--ink);font-weight:500}
+
+  /* detail columns */
+  .cols{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;margin-top:34px}
+  @media(max-width:720px){.cols{grid-template-columns:1fr;gap:24px}}
+  .colh{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--green);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+  ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 12px 34px;font-size:15.5px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;
+    font-family:var(--mono);font-size:12px;color:#fff;background:var(--green);
+    width:22px;height:22px;border-radius:50%;display:grid;place-items:center}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:2px 8px;
+    border-radius:2px;display:inline-block;margin:0 6px 6px 0}
+  .pro{background:#e7efdd;color:#375c22}
+  .con{background:#f4e6d6;color:#8a5320}
+  .atbd{margin-top:18px;background:var(--paper-2);border-left:3px solid var(--ochre);
+    padding:14px 16px;font-size:14.5px;border-radius:0 3px 3px 0}
+  .atbd b{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:4px}
+  code{font-family:var(--mono);font-size:.88em;background:#fff9ee;border:1px solid var(--rule);
+    padding:1px 5px;border-radius:3px}
+
+  /* svg helpers */
+  .lbl{font-family:var(--mono);font-size:12px;fill:var(--ink-soft)}
+  .lbl-s{font-family:var(--mono);font-size:10.5px;fill:var(--ink-soft)}
+  .lbl-b{font-family:var(--body);font-size:12.5px;fill:var(--ink);font-weight:600}
+  .ann{font-family:var(--display);font-style:italic;font-size:13px;fill:var(--ochre)}
+  .stroke{stroke:var(--ink);stroke-width:1.4;fill:none}
+  .leader{stroke:var(--ochre);stroke-width:1;fill:none;stroke-dasharray:2 2}
+
+  footer{padding:60px 0 90px}
+  footer h3{font-family:var(--display);font-size:26px;font-weight:600;margin:0 0 18px}
+  .rel{display:grid;gap:10px;max-width:70ch}
+  .rel div{display:flex;gap:12px;font-size:15.5px}
+  .rel .dot{font-family:var(--mono);color:var(--ochre);flex:0 0 auto}
+  .foot-note{margin-top:34px;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    border-top:1px solid var(--rule);padding-top:18px}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+    .draw{stroke-dasharray:none !important;stroke-dashoffset:0 !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">MapBiomas Caatinga · ATBD Coleção 11</p>
+    <h1>Os algoritmos por trás do <em>mapa</em></h1>
+    <p class="lede">Uma explicação visual dos métodos que sustentam a classificação de uso e cobertura da terra da Caatinga: os classificadores <strong>Random Forest</strong> e <strong>Gradient Tree Boosting</strong>, e as etapas que os preparam — <strong>RFECV</strong> (seleção de atributos) e <strong>GridSearchCV</strong> (ajuste de hiperparâmetros).</p>
+
+    <div class="flow" role="img" aria-label="Fluxo: as amostras alimentam, em paralelo, o RFECV (que define o feature space) e o GridSearchCV (que define os hiperparâmetros ótimos); os dois resultados juntos alimentam o classificador — Random Forest ou Gradient Tree Boosting (na Coleção 11, o GTB).">
+      <div class="f-end amostras">
+        <span class="k">Entrada</span>
+        <span class="v">Amostras (ROIs)</span>
+      </div>
+      <div class="f-mid">
+        <div class="f-lane">
+          <span class="ar">→</span>
+          <div class="box sel">
+            <span class="k">Seleção de atributos</span>
+            <span class="v">RFECV</span>
+            <span class="out">→ feature space</span>
+          </div>
+          <span class="ar">→</span>
+        </div>
+        <div class="f-lane">
+          <span class="ar">→</span>
+          <div class="box grid">
+            <span class="k">Ajuste de hiperparâmetros</span>
+            <span class="v">GridSearchCV</span>
+            <span class="out">→ parâmetros ótimos</span>
+          </div>
+          <span class="ar">→</span>
+        </div>
+      </div>
+      <div class="f-end clf">
+        <span class="k">Classificação</span>
+        <span class="v">Classificador</span>
+        <div class="clf-opts">
+          <span class="opt">Random Forest</span>
+          <span class="opt-or">ou</span>
+          <span class="opt on">Gradient Tree Boosting<span class="mini">usado na Coleção 11</span></span>
+        </div>
+        <span class="out">usa atributos + parâmetros</span>
+      </div>
+    </div>
+    <p class="pipe-note">Das mesmas <b>amostras</b> saem duas coisas em paralelo: o <b>RFECV</b> define <b>quais atributos</b> usar (com Random Forest como estimador) e o <b>GridSearchCV</b> encontra os <b>melhores hiperparâmetros</b>. Os dois resultados juntos alimentam o <b>classificador</b> — Random Forest ou Gradient Tree Boosting (na Coleção 11, o GTB).</p>
+  </div>
+</header>
+
+<!-- ============ PLATE I — RANDOM FOREST ============ -->
+<section class="plate reveal">
+  <div class="wrap">
+    <div class="plate-head">
+      <div class="roman">I</div>
+      <div>
+        <div class="kind">Ensemble por votação · bagging</div>
+        <h2>Random Forest<span class="full">Floresta aleatória — Breiman (2001)</span></h2>
+      </div>
+    </div>
+    <p class="desc">Um comitê de árvores de decisão. Cada árvore é treinada com uma amostra sorteada <em>com reposição</em> dos dados e, em cada divisão, enxerga apenas um subconjunto aleatório dos atributos. As árvores crescem de forma independente e a classe final sai do <strong>voto da maioria</strong>.</p>
+
+    <figure>
+      <svg viewBox="0 0 880 400" role="img" aria-label="Diagrama do Random Forest: das amostras saem 3 subamostras por sorteio bootstrap (cerca de 80% cada), que treinam 3 árvores independentes de 3 níveis; as árvores votam e a maioria define a classe final.">
+        <!-- top annotation -->
+        <text x="176" y="20" class="ann">sorteio bootstrap · cada árvore recebe ≈ 80% das amostras (exemplo)</text>
+
+        <!-- data -->
+        <text x="16" y="146" class="lbl-b">Amostras</text>
+        <g transform="translate(16,154)">
+          <rect width="100" height="100" rx="4" class="stroke" fill="#fffdf7"/>
+          <g>
+            <circle cx="18" cy="18" r="7" fill="var(--forest)"/><circle cx="42" cy="18" r="7" fill="var(--savana)"/><circle cx="66" cy="18" r="7" fill="var(--pasto)"/>
+            <circle cx="18" cy="42" r="7" fill="var(--savana)"/><circle cx="42" cy="42" r="7" fill="var(--forest)"/><circle cx="66" cy="42" r="7" fill="var(--campo)"/>
+            <circle cx="18" cy="66" r="7" fill="var(--forest)"/><circle cx="42" cy="66" r="7" fill="var(--pasto)"/><circle cx="66" cy="66" r="7" fill="var(--savana)"/>
+            <circle cx="84" cy="30" r="7" fill="var(--forest)"/><circle cx="84" cy="54" r="7" fill="var(--savana)"/><circle cx="84" cy="78" r="7" fill="var(--campo)"/>
+          </g>
+        </g>
+
+        <!-- fork: amostras -> 3 subsamples -->
+        <path class="stroke" d="M116 194 C150 194 150 78 176 78"/>
+        <path class="stroke" d="M116 204 L176 204"/>
+        <path class="stroke" d="M116 214 C150 214 150 326 176 326"/>
+
+        <!-- subsample boxes (~80% via bootstrap) -->
+        <g transform="translate(176,46)">
+          <rect width="122" height="64" rx="4" class="stroke" fill="#fffdf7"/>
+          <text x="12" y="21" class="lbl-b">Subamostra 1</text>
+          <rect x="12" y="30" width="98" height="7" rx="3" fill="#e7ddc4"/><rect x="12" y="30" width="78" height="7" rx="3" fill="var(--olive)"/>
+          <text x="12" y="54" class="lbl-s">≈ 80% (bootstrap)</text>
+        </g>
+        <g transform="translate(176,172)">
+          <rect width="122" height="64" rx="4" class="stroke" fill="#fffdf7"/>
+          <text x="12" y="21" class="lbl-b">Subamostra 2</text>
+          <rect x="12" y="30" width="98" height="7" rx="3" fill="#e7ddc4"/><rect x="12" y="30" width="78" height="7" rx="3" fill="var(--olive)"/>
+          <text x="12" y="54" class="lbl-s">≈ 80% (bootstrap)</text>
+        </g>
+        <g transform="translate(176,298)">
+          <rect width="122" height="64" rx="4" class="stroke" fill="#fffdf7"/>
+          <text x="12" y="21" class="lbl-b">Subamostra 3</text>
+          <rect x="12" y="30" width="98" height="7" rx="3" fill="#e7ddc4"/><rect x="12" y="30" width="78" height="7" rx="3" fill="var(--olive)"/>
+          <text x="12" y="54" class="lbl-s">≈ 80% (bootstrap)</text>
+        </g>
+
+        <!-- subsample -> tree connectors -->
+        <path class="stroke" d="M298 78 L356 78"/>
+        <path class="stroke" d="M298 204 L356 204"/>
+        <path class="stroke" d="M298 330 L356 330"/>
+
+        <!-- three trees (3 levels) -->
+        <!-- tree 1 -->
+        <g transform="translate(356,32)">
+          <rect width="214" height="92" rx="4" class="stroke" fill="#fffdf7"/>
+          <text x="12" y="19" class="lbl-s">Árvore 1</text>
+          <g transform="translate(22,24)">
+            <circle cx="46" cy="8" r="4.5" class="stroke"/>
+            <line x1="46" y1="12" x2="26" y2="30" class="stroke"/><line x1="46" y1="12" x2="66" y2="30" class="stroke"/>
+            <circle cx="26" cy="34" r="4.5" class="stroke"/><circle cx="66" cy="34" r="4.5" class="stroke"/>
+            <line x1="26" y1="38" x2="14" y2="58" class="stroke"/><line x1="26" y1="38" x2="38" y2="58" class="stroke"/>
+            <line x1="66" y1="38" x2="54" y2="58" class="stroke"/><line x1="66" y1="38" x2="78" y2="58" class="stroke"/>
+            <circle cx="14" cy="62" r="4.5" class="stroke"/><circle cx="38" cy="62" r="4.5" class="stroke"/><circle cx="54" cy="62" r="4.5" class="stroke"/><circle cx="78" cy="62" r="4.5" class="stroke"/>
+          </g>
+          <rect x="150" y="35" width="52" height="22" rx="3" fill="var(--forest)"/><text x="176" y="50" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:#fff">Flor.</text>
+        </g>
+        <!-- tree 2 -->
+        <g transform="translate(356,158)">
+          <rect width="214" height="92" rx="4" class="stroke" fill="#fffdf7"/>
+          <text x="12" y="19" class="lbl-s">Árvore 2</text>
+          <g transform="translate(22,24)">
+            <circle cx="46" cy="8" r="4.5" class="stroke"/>
+            <line x1="46" y1="12" x2="26" y2="30" class="stroke"/><line x1="46" y1="12" x2="66" y2="30" class="stroke"/>
+            <circle cx="26" cy="34" r="4.5" class="stroke"/><circle cx="66" cy="34" r="4.5" class="stroke"/>
+            <line x1="26" y1="38" x2="14" y2="58" class="stroke"/><line x1="26" y1="38" x2="38" y2="58" class="stroke"/>
+            <line x1="66" y1="38" x2="54" y2="58" class="stroke"/><line x1="66" y1="38" x2="78" y2="58" class="stroke"/>
+            <circle cx="14" cy="62" r="4.5" class="stroke"/><circle cx="38" cy="62" r="4.5" class="stroke"/><circle cx="54" cy="62" r="4.5" class="stroke"/><circle cx="78" cy="62" r="4.5" class="stroke"/>
+          </g>
+          <rect x="150" y="35" width="52" height="22" rx="3" fill="var(--savana)"/><text x="176" y="50" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:#234">Sav.</text>
+        </g>
+        <!-- tree 3 -->
+        <g transform="translate(356,284)">
+          <rect width="214" height="92" rx="4" class="stroke" fill="#fffdf7"/>
+          <text x="12" y="19" class="lbl-s">Árvore 3</text>
+          <g transform="translate(22,24)">
+            <circle cx="46" cy="8" r="4.5" class="stroke"/>
+            <line x1="46" y1="12" x2="26" y2="30" class="stroke"/><line x1="46" y1="12" x2="66" y2="30" class="stroke"/>
+            <circle cx="26" cy="34" r="4.5" class="stroke"/><circle cx="66" cy="34" r="4.5" class="stroke"/>
+            <line x1="26" y1="38" x2="14" y2="58" class="stroke"/><line x1="26" y1="38" x2="38" y2="58" class="stroke"/>
+            <line x1="66" y1="38" x2="54" y2="58" class="stroke"/><line x1="66" y1="38" x2="78" y2="58" class="stroke"/>
+            <circle cx="14" cy="62" r="4.5" class="stroke"/><circle cx="38" cy="62" r="4.5" class="stroke"/><circle cx="54" cy="62" r="4.5" class="stroke"/><circle cx="78" cy="62" r="4.5" class="stroke"/>
+          </g>
+          <rect x="150" y="35" width="52" height="22" rx="3" fill="var(--forest)"/><text x="176" y="50" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:#fff">Flor.</text>
+        </g>
+        <text x="356" y="392" class="ann">…centenas de árvores independentes</text>
+
+        <!-- votes to tally (unchanged content) -->
+        <path class="stroke" d="M570 78 C592 78 596 168 620 172"/>
+        <path class="stroke" d="M570 204 L620 202"/>
+        <path class="stroke" d="M570 330 C592 330 596 238 620 234"/>
+
+        <!-- tally box -->
+        <g transform="translate(620,138)">
+          <rect width="248" height="128" rx="5" class="stroke" fill="#fff9ee"/>
+          <text x="16" y="26" class="lbl-b">Voto da maioria</text>
+          <rect x="16" y="40" width="120" height="14" rx="2" fill="var(--forest)"/><text x="144" y="51" class="lbl-s">Floresta ×2</text>
+          <rect x="16" y="62" width="60" height="14" rx="2" fill="var(--savana)"/><text x="84" y="73" class="lbl-s">Savana ×1</text>
+          <line x1="16" y1="88" x2="232" y2="88" class="leader"/>
+          <text x="16" y="112" class="lbl-b" style="fill:var(--green)">Classe final → Floresta</text>
+        </g>
+      </svg>
+      <figcaption><b>Como ler:</b> cada árvore é treinada com uma subamostra sorteada (≈80% das amostras, com reposição) e dá um palpite; a floresta reúne todos os palpites e devolve a classe mais votada.</figcaption>
+    </figure>
+
+    <div class="cols">
+      <div>
+        <p class="colh">Como funciona</p>
+        <ol class="steps">
+          <li>Sorteia várias amostras dos dados (<em>bootstrap</em>, com reposição).</li>
+          <li>Treina uma árvore em cada amostra, de forma independente.</li>
+          <li>Em cada divisão, considera só um subconjunto aleatório dos atributos.</li>
+          <li>Combina tudo pelo <strong>voto da maioria</strong> das árvores.</li>
+        </ol>
+      </div>
+      <div>
+        <p class="colh">Características</p>
+        <span class="tag pro">robusto</span><span class="tag pro">paralelizável</span>
+        <span class="tag pro">resiste ao sobreajuste</span><span class="tag pro">muitos atributos</span>
+        <span class="tag con">pode pender p/ classes majoritárias</span>
+        <div class="atbd"><b>No ATBD Caatinga</b>É o estimador usado dentro do RFECV (800 árvores) e foi o classificador principal do bioma até a Coleção 7.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATE II — GTB ============ -->
+<section class="plate reveal">
+  <div class="wrap">
+    <div class="plate-head">
+      <div class="roman">II</div>
+      <div>
+        <div class="kind">Ensemble sequencial · boosting</div>
+        <h2>Gradient Tree Boosting<span class="full">GTB — Lawrence et al. (2004)</span></h2>
+      </div>
+    </div>
+    <p class="desc">Também combina árvores, mas as constrói <strong>em sequência</strong>: cada nova árvore aprende a corrigir o <em>erro</em> (resíduo) que as anteriores deixaram. O modelo final é a soma ponderada de todas; a <strong>taxa de aprendizado</strong> (<code>shrinkage</code>) controla o quanto cada árvore contribui.</p>
+
+    <figure>
+      <svg viewBox="0 0 800 320" role="img" aria-label="Diagrama do Gradient Tree Boosting: árvores em sequência corrigindo o erro residual que diminui a cada passo">
+        <!-- stage helper: tree + residual bar -->
+        <!-- baseline -->
+        <text x="20" y="150" class="lbl-s" transform="rotate(-90 20 150)">erro residual</text>
+        <line x1="34" y1="40" x2="34" y2="210" class="stroke" stroke-width="1"/>
+
+        <!-- Stage 1 -->
+        <g transform="translate(60,0)">
+          <text x="40" y="30" class="lbl-b" text-anchor="middle">Árvore 1</text>
+          <g transform="translate(18,42)">
+            <circle cx="22" cy="16" r="5" class="stroke"/><line x1="22" y1="21" x2="8" y2="36" class="stroke"/><line x1="22" y1="21" x2="36" y2="36" class="stroke"/>
+            <circle cx="8" cy="40" r="5" class="stroke"/><circle cx="36" cy="40" r="5" class="stroke"/>
+          </g>
+          <text x="40" y="112" class="lbl-s" text-anchor="middle">palpite inicial</text>
+          <rect x="16" y="120" width="48" height="90" rx="2" fill="var(--sienna)" opacity=".85"/>
+          <text x="40" y="228" class="lbl-s" text-anchor="middle">erro grande</text>
+        </g>
+        <text x="150" y="130" class="lbl" text-anchor="middle">+η→</text>
+
+        <!-- Stage 2 -->
+        <g transform="translate(180,0)">
+          <text x="40" y="30" class="lbl-b" text-anchor="middle">Árvore 2</text>
+          <g transform="translate(18,42)">
+            <circle cx="22" cy="16" r="5" class="stroke"/><line x1="22" y1="21" x2="8" y2="36" class="stroke"/><line x1="22" y1="21" x2="36" y2="36" class="stroke"/>
+            <circle cx="8" cy="40" r="5" class="stroke"/><circle cx="36" cy="40" r="5" class="stroke"/>
+          </g>
+          <text x="40" y="112" class="lbl-s" text-anchor="middle">ajusta o resíduo</text>
+          <rect x="16" y="150" width="48" height="60" rx="2" fill="var(--ochre)" opacity=".9"/>
+          <text x="40" y="228" class="lbl-s" text-anchor="middle">erro menor</text>
+        </g>
+        <text x="270" y="130" class="lbl" text-anchor="middle">+η→</text>
+
+        <!-- Stage 3 -->
+        <g transform="translate(300,0)">
+          <text x="40" y="30" class="lbl-b" text-anchor="middle">Árvore 3</text>
+          <g transform="translate(18,42)">
+            <circle cx="22" cy="16" r="5" class="stroke"/><line x1="22" y1="21" x2="8" y2="36" class="stroke"/><line x1="22" y1="21" x2="36" y2="36" class="stroke"/>
+            <circle cx="8" cy="40" r="5" class="stroke"/><circle cx="36" cy="40" r="5" class="stroke"/>
+          </g>
+          <text x="40" y="112" class="lbl-s" text-anchor="middle">ajusta o resíduo</text>
+          <rect x="16" y="178" width="48" height="32" rx="2" fill="var(--olive)"/>
+          <text x="40" y="228" class="lbl-s" text-anchor="middle">erro pequeno</text>
+        </g>
+        <text x="390" y="130" class="lbl" text-anchor="middle">+η→ …</text>
+
+        <!-- arrow to sum -->
+        <path class="stroke" d="M430 125 L520 125" marker-end="url(#ah)"/>
+        <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="var(--ink)"/></marker></defs>
+
+        <!-- final model -->
+        <g transform="translate(524,52)">
+          <rect width="244" height="150" rx="5" class="stroke" fill="#fff9ee"/>
+          <text x="18" y="30" class="lbl-b">Modelo final</text>
+          <text x="18" y="54" class="lbl">= Árvore 1</text>
+          <text x="18" y="76" class="lbl">+ η · Árvore 2</text>
+          <text x="18" y="98" class="lbl">+ η · Árvore 3 + …</text>
+          <line x1="18" y1="112" x2="226" y2="112" class="leader"/>
+          <text x="18" y="134" class="lbl-b" style="fill:var(--green)">soma que erra cada vez menos</text>
+        </g>
+        <text x="524" y="228" class="ann">η = taxa de aprendizado (shrinkage)</text>
+      </svg>
+      <figcaption><b>Como ler:</b> a barra colorida é o quanto o modelo ainda erra. A cada árvore nova ela encolhe, porque a árvore foi treinada justamente para corrigir o que faltava.</figcaption>
+    </figure>
+
+    <div class="cols">
+      <div>
+        <p class="colh">Como funciona</p>
+        <ol class="steps">
+          <li>A primeira árvore faz um palpite e sobra um erro (resíduo).</li>
+          <li>A próxima árvore é treinada para prever esse resíduo.</li>
+          <li>O resultado entra na soma, atenuado pela taxa de aprendizado.</li>
+          <li>Repete-se por muitas árvores, reduzindo o erro passo a passo.</li>
+        </ol>
+      </div>
+      <div>
+        <p class="colh">Características</p>
+        <span class="tag pro">acurácia alta</span><span class="tag pro">bom em classes difíceis</span>
+        <span class="tag pro">lida com desbalanceamento</span>
+        <span class="tag con">treino sequencial (mais lento)</span>
+        <span class="tag con">sensível a hiperparâmetros e outliers</span>
+        <div class="atbd"><b>No ATBD Caatinga</b>Classificador principal desde a Coleção 9. Na Coleção 11 usa <code>smileGradientTreeBoost</code> com 30 árvores, <code>shrinkage</code> 0.1 e <code>samplingRate</code> 0.65, por bacia/ano. Os hiperparâmetros são ajustados com <code>GridSearchCV</code>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATE III — RFECV ============ -->
+<section class="plate reveal">
+  <div class="wrap">
+    <div class="plate-head">
+      <div class="roman">III</div>
+      <div>
+        <div class="kind">Seleção de atributos · não é classificador</div>
+        <h2>RFECV<span class="full">Recursive Feature Elimination with Cross-Validation</span></h2>
+      </div>
+    </div>
+    <p class="desc">Serve para <strong>escolher quais atributos usar</strong>, não para classificar. Ele treina um modelo, ordena os atributos por importância, remove os mais fracos e repete — usando <strong>validação cruzada</strong> para medir qual quantidade de atributos entrega o melhor desempenho.</p>
+
+    <figure>
+      <svg viewBox="0 0 800 340" role="img" aria-label="Diagrama do RFECV: eliminação recursiva de atributos por importância e curva de validação cruzada com o número ótimo de atributos">
+        <!-- LEFT: importance ranking + elimination -->
+        <text x="20" y="24" class="lbl-b">1 · Ranquear por importância</text>
+        <g transform="translate(20,40)">
+          <!-- bars descending -->
+          <g>
+            <rect x="0" y="0" width="150" height="16" rx="2" fill="var(--green)"/><text x="158" y="13" class="lbl-s">ndvi</text>
+            <rect x="0" y="24" width="128" height="16" rx="2" fill="var(--green)"/><text x="136" y="37" class="lbl-s">ndfia</text>
+            <rect x="0" y="48" width="104" height="16" rx="2" fill="var(--olive)"/><text x="112" y="61" class="lbl-s">ndti</text>
+            <rect x="0" y="72" width="80" height="16" rx="2" fill="var(--olive)"/><text x="88" y="85" class="lbl-s">wetness</text>
+            <rect x="0" y="96" width="54" height="16" rx="2" fill="var(--campo)"/><text x="62" y="109" class="lbl-s">brba</text>
+            <!-- weakest, to eliminate -->
+            <rect x="0" y="120" width="30" height="16" rx="2" fill="var(--sienna)" opacity=".55"/>
+            <text x="38" y="133" class="lbl-s" style="fill:var(--sienna)">✂ menos importante</text>
+          </g>
+        </g>
+        <!-- loop -->
+        <g transform="translate(60,190)">
+          <path class="stroke" d="M6 20 a34 20 0 1 0 68 0 a34 20 0 1 0 -68 0" stroke="var(--ochre)"/>
+          <path d="M74 20 l-6 -6 m6 6 l-6 6" class="stroke" stroke="var(--ochre)"/>
+          <text x="40" y="56" class="ann" text-anchor="middle">remove e repete</text>
+        </g>
+        <text x="20" y="300" class="lbl-s">2 · elimina o(s) mais fraco(s) e treina de novo</text>
+
+        <!-- middle arrow -->
+        <path class="stroke" d="M300 160 L360 160" marker-end="url(#ah2)"/>
+        <defs><marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="var(--ink)"/></marker></defs>
+
+        <!-- RIGHT: CV curve -->
+        <text x="372" y="24" class="lbl-b">3 · Validação cruzada escolhe o nº ótimo</text>
+        <g transform="translate(392,44)">
+          <!-- axes -->
+          <line x1="40" y1="0" x2="40" y2="210" class="stroke" stroke-width="1"/>
+          <line x1="40" y1="210" x2="372" y2="210" class="stroke" stroke-width="1"/>
+          <text x="6" y="100" class="lbl-s" transform="rotate(-90 6 100)">acurácia (CV)</text>
+          <text x="206" y="238" class="lbl-s" text-anchor="middle">nº de atributos →</text>
+          <!-- curve: rises then plateaus (poly for area/tick) -->
+          <path class="draw" fill="none" stroke="var(--ochre)" stroke-width="2.6"
+            d="M48 196 C90 150 120 96 150 78 C180 60 210 56 245 58 C290 60 330 62 366 64"/>
+          <!-- optimal point -->
+          <circle cx="150" cy="78" r="5" fill="var(--green)"/>
+          <line x1="150" y1="78" x2="150" y2="210" class="leader"/>
+          <line x1="40" y1="78" x2="150" y2="78" class="leader"/>
+          <text x="156" y="52" class="lbl-b" style="fill:var(--green)">nº ótimo</text>
+          <text x="156" y="70" class="lbl-s">(piso: 15 atributos)</text>
+          <text x="150" y="226" class="lbl-s" text-anchor="middle">15</text>
+        </g>
+      </svg>
+      <figcaption><b>Como ler:</b> a curva sobe enquanto atributos úteis são mantidos e estabiliza quando sobram só os redundantes. O pico marca quantos atributos vale a pena manter.</figcaption>
+    </figure>
+
+    <div class="cols">
+      <div>
+        <p class="colh">Como funciona</p>
+        <ol class="steps">
+          <li>Treina o modelo com todos os atributos.</li>
+          <li>Ordena os atributos por importância.</li>
+          <li>Remove o(s) menos importante(s) e treina de novo.</li>
+          <li>Mede cada tamanho de subconjunto por validação cruzada.</li>
+          <li>Fica com o nº de atributos de melhor média (respeitando o piso).</li>
+        </ol>
+      </div>
+      <div>
+        <p class="colh">Características</p>
+        <span class="tag pro">reduz dimensionalidade</span><span class="tag pro">corta ruído e redundância</span>
+        <span class="tag pro">escolha guiada por dados</span>
+        <span class="tag con">custo computacional</span>
+        <span class="tag con">depende do estimador usado</span>
+        <div class="atbd"><b>No ATBD Caatinga</b>Roda com Random Forest (800 árvores), <code>StratifiedKFold(3)</code>, passo 0.05 e mínimo de 15 atributos, por bacia/ano (§3.3).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATE IV — GRIDSEARCHCV ============ -->
+<section class="plate reveal">
+  <div class="wrap">
+    <div class="plate-head">
+      <div class="roman">IV</div>
+      <div>
+        <div class="kind">Ajuste de hiperparâmetros · busca em grade</div>
+        <h2>GridSearchCV<span class="full">Grid Search with Cross-Validation</span></h2>
+      </div>
+    </div>
+    <p class="desc">Os <strong>hiperparâmetros</strong> são as configurações do classificador definidas antes do treino (por exemplo, quantas árvores e qual a taxa de aprendizado). O GridSearchCV encontra a melhor configuração por <strong>força bruta</strong>: monta uma grade com os valores candidatos, treina e avalia <strong>cada combinação</strong> por validação cruzada e fica com a de melhor pontuação média.</p>
+
+    <figure>
+      <svg viewBox="0 0 800 340" role="img" aria-label="Diagrama do GridSearchCV: cada combinação de hiperparâmetros é avaliada por validação cruzada em uma grade; a melhor combinação (30 árvores, shrinkage 0.1) é destacada.">
+        <!-- LEFT: cross-validation (k=3) -->
+        <text x="20" y="24" class="lbl-b">1 · Validação cruzada (k = 3)</text>
+        <g transform="translate(20,40)">
+          <!-- row 1: fold1 = teste -->
+          <rect x="0" y="0" width="44" height="22" rx="2" fill="var(--ochre)"/><rect x="46" y="0" width="44" height="22" rx="2" fill="var(--savana)"/><rect x="92" y="0" width="44" height="22" rx="2" fill="var(--savana)"/>
+          <!-- row 2: fold2 = teste -->
+          <rect x="0" y="30" width="44" height="22" rx="2" fill="var(--savana)"/><rect x="46" y="30" width="44" height="22" rx="2" fill="var(--ochre)"/><rect x="92" y="30" width="44" height="22" rx="2" fill="var(--savana)"/>
+          <!-- row 3: fold3 = teste -->
+          <rect x="0" y="60" width="44" height="22" rx="2" fill="var(--savana)"/><rect x="46" y="60" width="44" height="22" rx="2" fill="var(--savana)"/><rect x="92" y="60" width="44" height="22" rx="2" fill="var(--ochre)"/>
+        </g>
+        <!-- legend -->
+        <g transform="translate(20,138)">
+          <rect x="0" y="0" width="12" height="12" rx="2" fill="var(--ochre)"/><text x="18" y="11" class="lbl-s">teste</text>
+          <rect x="70" y="0" width="12" height="12" rx="2" fill="var(--savana)"/><text x="88" y="11" class="lbl-s">treino</text>
+        </g>
+        <text x="20" y="182" class="lbl-s">a média das 3 divisões</text>
+        <text x="20" y="198" class="lbl-s">vira a nota da combinação</text>
+
+        <!-- arrow to grid -->
+        <path class="stroke" d="M170 110 L214 110" marker-end="url(#ah3)"/>
+        <defs><marker id="ah3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="var(--ink)"/></marker></defs>
+        <text x="150" y="98" class="ann">avalia cada célula</text>
+
+        <!-- RIGHT: grid of combinations -->
+        <text x="300" y="24" class="lbl-b">2 · Busca em grade — todas as combinações</text>
+        <!-- y axis label -->
+        <text x="300" y="150" class="lbl-s" transform="rotate(-90 300 150)">n.º de árvores</text>
+        <!-- y ticks -->
+        <text x="356" y="82" class="lbl-s" text-anchor="end">50</text>
+        <text x="356" y="128" class="lbl-s" text-anchor="end">30</text>
+        <text x="356" y="174" class="lbl-s" text-anchor="end">20</text>
+        <!-- grid cells: origin x=364 y=54, cw=72 ch=46 -->
+        <!-- row n=50 -->
+        <rect x="364" y="54" width="72" height="46" fill="var(--green)" fill-opacity="0.34" stroke="#fff" stroke-width="2"/><text x="400" y="82" text-anchor="middle" class="lbl-s">0.77</text>
+        <rect x="436" y="54" width="72" height="46" fill="var(--green)" fill-opacity="0.42" stroke="#fff" stroke-width="2"/><text x="472" y="82" text-anchor="middle" class="lbl-s">0.79</text>
+        <rect x="508" y="54" width="72" height="46" fill="var(--green)" fill-opacity="0.24" stroke="#fff" stroke-width="2"/><text x="544" y="82" text-anchor="middle" class="lbl-s">0.74</text>
+        <!-- row n=30 (best in middle) -->
+        <rect x="364" y="100" width="72" height="46" fill="var(--green)" fill-opacity="0.38" stroke="#fff" stroke-width="2"/><text x="400" y="128" text-anchor="middle" class="lbl-s">0.78</text>
+        <rect x="436" y="100" width="72" height="46" fill="var(--green)" fill-opacity="0.60" stroke="#fff" stroke-width="2"/>
+        <rect x="437" y="101" width="70" height="44" fill="none" stroke="var(--ochre)" stroke-width="3"/>
+        <text x="472" y="126" text-anchor="middle" class="lbl-b" style="fill:#123">0.81</text><text x="472" y="139" text-anchor="middle" style="font-family:var(--mono);font-size:9px;fill:var(--sienna)">★ melhor</text>
+        <rect x="508" y="100" width="72" height="46" fill="var(--green)" fill-opacity="0.28" stroke="#fff" stroke-width="2"/><text x="544" y="128" text-anchor="middle" class="lbl-s">0.75</text>
+        <!-- row n=20 -->
+        <rect x="364" y="146" width="72" height="46" fill="var(--green)" fill-opacity="0.28" stroke="#fff" stroke-width="2"/><text x="400" y="174" text-anchor="middle" class="lbl-s">0.75</text>
+        <rect x="436" y="146" width="72" height="46" fill="var(--green)" fill-opacity="0.38" stroke="#fff" stroke-width="2"/><text x="472" y="174" text-anchor="middle" class="lbl-s">0.78</text>
+        <rect x="508" y="146" width="72" height="46" fill="var(--green)" fill-opacity="0.20" stroke="#fff" stroke-width="2"/><text x="544" y="174" text-anchor="middle" class="lbl-s">0.72</text>
+        <!-- x ticks -->
+        <text x="400" y="210" text-anchor="middle" class="lbl-s">0.05</text>
+        <text x="472" y="210" text-anchor="middle" class="lbl-s">0.10</text>
+        <text x="544" y="210" text-anchor="middle" class="lbl-s">0.20</text>
+        <text x="472" y="230" text-anchor="middle" class="lbl-s">taxa de aprendizado (shrinkage) →</text>
+        <!-- best callout -->
+        <text x="620" y="128" class="ann">melhor: 30 árvores,</text>
+        <text x="620" y="146" class="ann">shrinkage 0.1</text>
+      </svg>
+      <figcaption><b>Como ler:</b> cada célula é uma combinação de hiperparâmetros; a cor mostra o desempenho (média da validação cruzada) e a célula destacada é a melhor — aqui, 30 árvores com shrinkage 0.1.</figcaption>
+    </figure>
+
+    <div class="cols">
+      <div>
+        <p class="colh">Como funciona</p>
+        <ol class="steps">
+          <li>Define uma grade de valores candidatos (ex.: taxa de aprendizado × n.º de árvores).</li>
+          <li>Para cada combinação, treina e avalia por validação cruzada.</li>
+          <li>Compara a pontuação média de todas as combinações.</li>
+          <li>Fica com a combinação de melhor desempenho.</li>
+        </ol>
+      </div>
+      <div>
+        <p class="colh">Características</p>
+        <span class="tag pro">busca exaustiva</span><span class="tag pro">reprodutível</span>
+        <span class="tag pro">simples de interpretar</span>
+        <span class="tag con">custo cresce com o nº de combinações</span>
+        <span class="tag con">exige definir a grade</span>
+        <div class="atbd"><b>No ATBD Caatinga</b>Ajusta os hiperparâmetros do <strong>GTB</strong> (taxa de aprendizado/<code>shrinkage</code> e n.º de árvores) por bacia/ano; os melhores valores vão para os dicionários de tuning que a classificação lê. Na Coleção 11, os defaults são 30 árvores e <code>shrinkage</code> 0.1 (§3.4).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap reveal">
+    <h3>Como as peças se conectam</h3>
+    <div class="rel">
+      <div><span class="dot">01</span><span>As <strong>amostras</strong> carregam dezenas de atributos espectrais por pixel.</span></div>
+      <div><span class="dot">02</span><span>Em paralelo, das mesmas amostras: o <strong>RFECV</strong> (com <strong>Random Forest</strong> como estimador) escolhe os atributos, e o <strong>GridSearchCV</strong> encontra os hiperparâmetros ótimos.</span></div>
+      <div><span class="dot">03</span><span>O <strong>classificador</strong> — Random Forest ou <strong>Gradient Tree Boosting</strong> (na Coleção 11, o GTB) — classifica cada bacia/ano usando os <strong>atributos selecionados</strong> e os <strong>parâmetros ajustados</strong>.</span></div>
+      <div><span class="dot">04</span><span>Filtros pós-classificação e a validação (85 mil pontos) fecham o processo.</span></div>
+    </div>
+    <p class="foot-note">Material de apoio ao ATBD MapBiomas Caatinga — Coleção 11. As descrições são conceituais; os parâmetros exatos e as decisões de implementação estão na Seção 3 do ATBD.</p>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // draw the CV curve when its plate appears
+  const path = document.querySelector('.draw');
+  if(path && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    const co = new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){
+        path.style.transition='stroke-dashoffset 1.6s ease .2s';
+        path.style.strokeDashoffset='0'; co.unobserve(e.target);
+      }});
+    },{threshold:.4});
+    co.observe(path.closest('figure'));
+  }
+</script>
+</body>
+</html>

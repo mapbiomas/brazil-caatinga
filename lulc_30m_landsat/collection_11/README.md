@@ -1,267 +1,213 @@
-# Land Use and Land Cover Mapping Project - Caatinga Biome — Collection 11
+# MapBiomas Coleção 11 — Caatinga
 
-This repository contains the complete workflow and scripts used for the annual mapping of land use and land cover in the Caatinga biome (Collection 11). The process is based on remote sensing techniques, utilizing the **Google Earth Engine (GEE)** platform and **Machine Learning** algorithms to classify Landsat satellite imagery at **30 m** spatial resolution, covering the full time series from **1985 to 2025** (41 years).
+Pipeline de classificação de **uso e cobertura da terra (LULC)** do bioma
+**Caatinga** para a Coleção 11 do MapBiomas. Produz a série anual de mapas de
+**1985 a 2025 (41 anos)** para **49 bacias hidrográficas**, combinando
+Google Earth Engine (GEE) e scikit-learn local.
 
-The project is organized into five main stages: sample collection, feature selection, hyperparameter tuning, classification, and post-classification filtering.
-
-## Methodological Flowchart
-
-The process flow diagram utilized in Collection 11.0 of the Caatinga biome is depicted in Figure 1. This flowchart consolidates each stage's key procedures, which were improved in this most recent collection. Generally speaking, the following procedures are involved in creating the land cover and land use maps in the Caatinga Biome: data input, sample collection, feature selection, hyperparameter tuning, classification models, post-classification filters, validation and visual inspection, and integration with MapBiomas.
-
-<p align="center">
-  <img src="../collection_10/images/fluxograma_reduzir.png" alt="Fluxograma otimizado de processos" width="300"/>
-</p>
-<p align="center">Figure 1. Simplified general flowchart.</p>
-
-</br>
-
-For further details, some improvements were added and are described below (Figure 2).
-
-<p align="center">
-  <img src="../collection_10/images/fluxograma.png" alt="Fluxograma de passos para o mapeamento da série de cobertura" width="600" height="700"/>
-</p>
-<p align="center">Figure 2. Classification process of MapBiomas Collection 11.0 (1985–2025) in the Caatinga biome.</p>
-
-
-## Classification Target Classes
-
-Collection 11.0 maps **10 land cover/use classes** in the Caatinga biome:
-
-| Code | Class                        |
-|------|------------------------------|
-| 3    | Forest Formation             |
-| 4    | Savanna Formation            |
-| 12   | Grassland / Campestre        |
-| 15   | Pasture                      |
-| 19   | Annual and Perennial Crops   |
-| 21   | Mosaic of Agriculture        |
-| 25   | Non-Vegetated Area           |
-| 29   | Rocky Outcrop                |
-| 33   | Water Body                   |
-| 36   | Irrigated Agriculture        |
-
-
-## Workflow Stages
-
-The workflow is organized into five major stages, each contained in its respective folder within the repository.
+> 📄 A descrição técnica completa e fiel ao código está em
+> **[`DESCRICAO_PROCESSO.md`](DESCRICAO_PROCESSO.md)** — base para o ATBD do projeto.
+> Contexto permanente do assistente em [`CLAUDE.md`](CLAUDE.md).
 
 ---
 
-### 1. Sample Data Collection (`src/samples_process`)
+## Fluxo do pipeline
 
-The collection of sample data (ROIs — Regions of Interest) forms the foundation for training the models. To optimize the process over a large area like the Caatinga, the biome was divided into **756 grids**, which are based on **49 hydrographic regions**.
+<img src="image/fluxograma_reduzir.png" alt="Fluxograma resumido do pipeline" width="60%">
 
-<p align="center">
-  <img src="../collection_10/images/wattershed_basin_classification.png" alt="Watershed basins used in the classification and sampling" width="400"/>
-</p>
-<p align="center">Figure 3. Watershed basins used in the classification and sampling of the MapBiomas LULC collections for Caatinga biome.</p>
-
-The collection areas are refined through a filter that uses exclusion layers to ensure sample quality, removing areas with deforestation alerts, burn scars, and inconsistencies between different data collections.
-
-**Improvements in Collection 11:**
-- `colect_ROIsAgrWat_fromGrade_with_Spectral_info.py` — specialized ROI collection for agricultural and water classes, using **Collection 10** (`assetMapbiomas100`) as the agreement mask.
-- `colect_ROIs_from_ROIsEE_with_Spectral_info.py` — collects ROIs directly from existing GEE assets, enabling faster re-collection in regions with insufficient samples.
-- `exportRoi.py` — exports consolidated ROI batches to GEE assets.
-- `merge_rois_from_Grade_Basin_to_bacias.py` — merges individual grid ROIs into basin-level feature collections.
-
-**Relevant Scripts:**
-* `colect_ROIsAgrWat_fromGrade_with_Spectral_info.py`
-* `colect_ROIs_from_ROIsEE_with_Spectral_info.py`
-* `merge_rois_from_Grade_Basin_to_bacias.py`
-* `exportRoi.py`
-
----
-
-### 2. Feature Analysis and Variable Selection (`src/features_process`)
-
-In this stage, the objective is to identify which of the hundreds of calculated spectral bands and indices are most relevant for classification, avoiding redundancy and improving model performance.
-
-**RFECV** (Recursive Feature Elimination with Cross-Validation, implemented via `scikit-learn`) is used to rank the most important variables. A correlation filter removes less important variables that are strongly correlated with others.
-
-**Improvements in Collection 11:**
-- `resample_cleaning_ROIsBasin.py` — applies spectral-similarity-based resampling to remove noisy samples within each basin, using binary class group dictionaries (`dictRemap`) and `StratifiedKFold` cross-validation to select the most representative samples.
-- `resamples_balances_ROIs.py` — balances the sample set per class group (vegetation, agropecuaria, non-vegetated) using configurable per-class limits (`quant_PtosxClass`), improving model stability in under-represented classes.
-- `downsamples_cleaning_ROIsBasin.py` / `downsamples_cleaning_ROIsBasin_v2.py` — iterative downsampling procedures to reduce class imbalance before feature selection.
-- `feature_selection_REFCV_col11.py` — updated RFECV implementation for Collection 11, incorporating the expanded spectral feature set.
-- `metricas_JM_distance.py` — computes Jeffries-Matusita separability distances between classes to guide feature selection and class merging decisions.
-- `reviewer_rois_by_basin_to_train.py` — visual review tool to audit ROI distributions per basin before training.
-
-**Relevant Scripts:**
-* `featureselection_functionsV2.py`
-* `feature_selection_REFCV_col11.py`
-* `resample_cleaning_ROIsBasin.py`
-* `resamples_balances_ROIs.py`
-* `correction_class_samples_downsampled.py`
-* `metricas_JM_distance.py`
-
----
-
-### 3. Hyperparameter Tuning (`src/features_process` — tuning scripts)
-
-To ensure the best possible classifier performance, a hyperparameter optimization (*tuning*) process is conducted using **HalvingGridSearchCV** from `scikit-learn`. This script systematically tests various combinations of GTB (Gradient Tree Boost) parameters for each basin and year. The combination that yields the best accuracy is saved to JSON for use in the classification stage.
-
-**Relevant Script:**
-* `hyperpTuning_Halving_Grid_Search.py`
-
----
-
-### 4. Classification (`src/classfication_process`)
-
-This is the stage where the land use and land cover map is generated for each basin and year using the **GEE Python API**. The classification script loads all artifacts generated in the previous stages:
-
-* **Geographic boundaries** of the basin.
-* A JSON file with the **list of selected features** per basin.
-* A JSON file with the **optimized hyperparameters** for the GTB classifier.
-
-The script runs the trained GTB model on the Landsat mosaic for the corresponding year (source: `projects/nexgenmap/MapBiomas2/LANDSAT/BRAZIL/mosaics-2`), generating the classified image exported to:
-`projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/Classifier/Classify_fromEEMV1`
-
-**Improvements in Collection 11:**
-- `classificacao_NotN_newBasin_Float_col10_probVC2_featMaps.py` — extended variant that also exports per-class probability maps alongside the hard classification.
-- `dict_expressions.py` — centralized dictionary of spectral index expressions used by all classification scripts.
-- `test_classify_single_bacia.js` — GEE JavaScript helper to visually inspect the classification result for a single basin.
-
-**Relevant Scripts:**
-* `classificacao_NotN_newBasin_Float_col10_probVC2.py`
-* `classificacao_NotN_newBasin_Float_col10_probVC2_featMaps.py`
-* `arqParametros_class.py`
-* `dict_expressions.py`
-
----
-
-### 5. Post-Classification Filters (`src/filters_process`)
-
-After the raw GTB classification is generated, a 5-step filter pipeline removes noise and temporal inconsistencies introduced by clouds, shadows, and spectral variability in the 41-year Landsat series. The complete description of each filter is in [`src/filters_process/README_filtros.md`](src/filters_process/README_filtros.md).
-
-<p align="center">
+| # | Etapa | Diretório | Onde roda | Produto |
+|---|---|---|---|---|
+| 1 | Coleta de amostras (ROIs) | `src/samples_process/` | GEE | `ROIs_byGradesIndv2` |
+| 2 | Seleção + limpeza de features | `src/features_process/` | sklearn local + GEE | `feat_sel_*.json`, `ROIs_clean_downsamples*` |
+| 3 | Classificação (GTB) | `src/classification_process/` | GEE | `Classify_fromEEMV1` |
+| 4 | Filtros pós-classificação | `src/filter/` | GEE | `POS-CLASS/Spatials_all` |
+| 5 | Integração/exportação final | `src/utieis_scripts/` | GEE | `COLLECTION-11/.../CAATINGA-{ano}-{v}` |
+| 6 | Validação (acurácia + área) | `src/validation/` | GEE + pandas/sklearn | CSVs e tabelas globais |
 
 ```
-Classify_fromEEMV1joined
-         │
-         ▼  filtersGapFill_step1A.py           ── STEP 1: Fill missing pixels
-    POS-CLASS/Gap-fill
-         │
-         ▼  filtersNaturalTemporal_step2A.py   ── STEP 2A: Natural temporal filter
-    POS-CLASS/TemporalA
-         │
-         ▼  filtersAntropicTemporal_step2B.py  ── STEP 2B: Anthropic temporal filter
-    POS-CLASS/Temporal
-         │
-         ▼  filtersSpatial_AllClass_step3A.py  ── STEP 3A: Spatial filter (all classes)
-    POS-CLASS/Spatials_all
-         │
-         ▼  filtersSpatial_By_Cover_step3A.py  ── STEP 3B: Spatial filter (by cover)
-    POS-CLASS/Spatials_int
-         │
-         ▼  filtersFrequency_step4A.py         ── STEP 4: Frequency-based stabilization
-    POS-CLASS/Frequency
-         │
-         ▼  filtersTemporal_step5A.py          ── STEP 5: Final temporal filter
-    POS-CLASS/TemporalCC   ← FINAL PRODUCT
+Landsat 32-day ─▶ ROIs (grade 30km, rótulo Col10) ─▶ RFECV + downsampling
+   ─▶ GradientTreeBoost por bacia/ano ─▶ Gap-fill ▸ Sieve ▸ Temporal J3/J4/J5
+   ─▶ Frequência ▸ Spatial All ─▶ integração ─▶ validação (85k pts / área ha)
 ```
 
-</p>
+---
 
-| Step | Script | What it does |
-|------|--------|-------------|
-| 1 | `filtersGapFill_step1A.py` | Fills null pixels caused by clouds, shadows, and ETM+ scan-line gaps using backward-fill from Collection 10 |
-| 2A | `filtersNaturalTemporal_step2A.py` | 6-year sliding window to correct 1–4 year anomalies in natural classes (direction: 2025→1985) |
-| 2B | `filtersAntropicTemporal_step2B.py` | 5-year sliding window to correct isolated natural pixels in anthropic areas |
-| 3A | `filtersSpatial_AllClass_step3A.py` | Replaces isolated pixels (< 12 connected pixels) with the mode of a 9×9 neighborhood |
-| 3B | `filtersSpatial_By_Cover_step3A.py` | Class-pair-specific spatial filter using mode or min reducer depending on context |
-| 4 | `filtersFrequency_step4A.py` | Stabilizes pixels that are 100% natural across all 41 years, assigning dominant class |
-| 5 | `filtersTemporal_step5A.py` | Final 3–5 year window to remove residual 1–3 year anomalies for Forest, Savanna, and Agriculture |
+## Etapas em detalhe
 
-**Relevant Scripts:**
-* `filtersGapFill_step1A.py`
-* `filtersNaturalTemporal_step2A.py`
-* `filtersAntropicTemporal_step2B.py`
-* `filtersSpatial_AllClass_step3A.py`
-* `filtersSpatial_By_Cover_step3A.py`
-* `filtersFrequency_step4A.py`
-* `filtersFrequency_step4B.py`
-* `filtersTemporal_step5A.py`
+Visão ampliada do processo — entradas de dados, bloco de aprendizado de
+máquina/tuning de hiperparâmetros e cadeia de pós-classificação até a integração:
 
+![Fluxograma ampliado do pipeline](image/fluxograma.png)
 
-## Repository Structure
+### 1. Coleta de amostras — `src/samples_process/`
+`colect_ROIsAgrWat_fromGrade_with_Spectral_info.py` coleta ROIs **por grade de
+30 km** ao longo dos 41 anos. Monta mosaicos Landsat (`LANDSAT/COMPOSITES/C02/
+T1_L2_32DAY`) em três períodos (year/wet=jan–jul/dry=ago–dez), calcula ~30 índices
+espectrais (+ SMA/NDFIa, slope, texturas), aplica a máscara de concordância
+(`aggrements`) e rotula cada amostra pela **Coleção 10 pública** (áreas estáveis),
+amostrando até 3000 px/grade/ano.
+Apoio: `gerar_percentis_p01_p99_bacia_ano.py` (percentis P1/P99 por bacia/ano),
+`register_parameters.py`, `README_indices_espectrais.md` (índices + DOIs).
 
-```
-lulc_30m_landsat/collection_11/
-├── README.md
-└── src/
-    ├── configure_account_projects_ee.py        # GEE account/project manager
-    ├── gee_tools.py                             # shared GEE utility functions
-    │
-    ├── samples_process/                         # Stage 1 — ROI Collection
-    │   ├── colect_ROIsAgrWat_fromGrade_with_Spectral_info.py
-    │   ├── colect_ROIs_from_ROIsEE_with_Spectral_info.py
-    │   ├── merge_rois_from_Grade_Basin_to_bacias.py
-    │   ├── exportRoi.py
-    │   ├── mosaicos_Landsat_GEE.js
-    │   └── dict_basin_49_lista_grades.json
-    │
-    ├── features_process/                        # Stage 2 — Feature Selection & Resampling
-    │   ├── featureselection_functionsV2.py
-    │   ├── feature_selection_REFCV_col11.py
-    │   ├── resample_cleaning_ROIsBasin.py
-    │   ├── resamples_balances_ROIs.py
-    │   ├── downsamples_cleaning_ROIsBasin.py
-    │   ├── correction_class_samples_downsampled.py
-    │   ├── metricas_JM_distance.py
-    │   ├── reviewer_rois_by_basin_to_train.py
-    │   ├── get_feature_select_fromjson.py
-    │   ├── FS_col11_json/                       # per-basin feature lists
-    │   └── arqParametros.py
-    │
-    ├── classfication_process/                   # Stage 3–4 — Tuning & Classification
-    │   ├── classificacao_NotN_newBasin_Float_col10_probVC2.py
-    │   ├── classificacao_NotN_newBasin_Float_col10_probVC2_featMaps.py
-    │   ├── arqParametros_class.py
-    │   ├── dict_expressions.py
-    │   └── test_classify_single_bacia.js
-    │
-    ├── filters_process/                         # Stage 5 — Post-Classification Filters
-    │   ├── README_filtros.md
-    │   ├── filtersGapFill_step1A.py
-    │   ├── filtersNaturalTemporal_step2A.py
-    │   ├── filtersAntropicTemporal_step2B.py
-    │   ├── filtersSpatial_AllClass_step3A.py
-    │   ├── filtersSpatial_By_Cover_step3A.py
-    │   ├── filtersFrequency_step4A.py
-    │   ├── filtersFrequency_step4B.py
-    │   └── filtersTemporal_step5A.py
-    │
-    └── show_mapas/                              # GEE visualization scripts
-        ├── showClassification_bacias.js
-        ├── show_3_years_consecutivos.js
-        └── cooncordancias_cole9_col10.js
+**Como rodar** — sem argumentos (parâmetros já setados no topo do arquivo: anos
+`anoIntInit/anoIntFin`, grade, `asset_output_grade`, amostragem por classe):
+```bash
+python src/samples_process/colect_ROIsAgrWat_fromGrade_with_Spectral_info.py
+
+# Apoio — percentis P1/P99 (opcional: --merge / --merge-clean para consolidar)
+python src/samples_process/gerar_percentis_p01_p99_bacia_ano.py
+python src/samples_process/gerar_percentis_p01_p99_bacia_ano.py --merge
 ```
 
+### 2. Features — `src/features_process/`
+- **Seleção (sklearn local):** `feature_selection_REFCV_col11.py` — `RFECV` com
+  `RandomForestClassifier(n_estimators=800)`, `StratifiedKFold(3)`, `step=0.05`,
+  `min_features=15`. Saída: `FS_col11_json/feat_sel_{bacia}_{ano}.json`.
+- **Limpeza + downsampling (GEE):** `resamples_balances_ROIs.py` →
+  `downsamples_cleaning_ROIsBasin.py` (v1) → `_v2.py`. Balanceamento por
+  **undersampling** com tetos por classe; a v1 usa GTB binário para amostrar por
+  faixa de probabilidade (preserva amostras difíceis). Dataset final: `CCredv2`.
+- Auditoria: `reviewer_rois_by_basin_to_train.py`.
 
-## Main Data Assets (GEE)
+**Como rodar** — a seleção RFECV usa **argumentos posicionais** (fatia da lista de
+bacias: início e fim); os demais rodam sem argumentos (edite a lista de bacias no
+arquivo):
+```bash
+# Seleção RFECV — bacias das posições 0 a 10 da lista
+python src/features_process/feature_selection_REFCV_col11.py 0 10
 
-| Asset | Description |
-|-------|-------------|
-| `projects/nexgenmap/MapBiomas2/LANDSAT/BRAZIL/mosaics-2` | Landsat annual mosaics (1985–2025) |
-| `projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/ROIs/ROIs_byGradesIndv2` | Per-grid ROIs |
-| `projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/ROIs/ROIs_clean_downsamplesCCred` | Cleaned and resampled ROIs used for training |
-| `projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/aggrements` | Agreement mask (Col10 × Col11) used for exclusion filters |
-| `projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/Classifier/Classify_fromEEMV1` | Raw GTB classification output |
-| `projects/mapbiomas-workspace/AMOSTRAS/col11/CAATINGA/POS-CLASS/TemporalCC` | Final post-filtered product |
-| `projects/mapbiomas-workspace/AMOSTRAS/col9/CAATINGA/bacias_hidrografica_caatinga_49_regions` | 49 hydrographic basin boundaries |
-| `projects/mapbiomas-public/assets/brazil/lulc/collection10/mapbiomas_brazil_collection10_integration_v2` | MapBiomas Collection 10 reference |
+# Limpeza + downsampling (na ordem)
+python src/features_process/resamples_balances_ROIs.py
+python src/features_process/downsamples_cleaning_ROIsBasin.py
+python src/features_process/downsamples_cleaning_ROIsBasin_v2.py
+```
+
+### 3. Classificação — `src/classification_process/`
+`classificacao_NotN_newBasin_Float_col10_probVC3_dict_BaY_bal.py` treina e aplica
+`ee.Classifier.smileGradientTreeBoost` por bacia/ano.
+
+```python
+PMT_GTB = {'numberOfTrees': 30, 'shrinkage': 0.1, 'samplingRate': 0.65,
+           'loss': 'LeastSquares', 'seed': 0}
+# shrinkage/n_estimators ajustados por bacia via dados/dictBetterModelpmtCol10v1.json
+```
+Features: `lst_feat_select[:45]` (fixa). Mosaico com gap-fill pelo mosaico
+MapBiomas reescalado. Anos sem amostra própria reutilizam 2024
+(`ano_amostra = min(nyear, 2024)`). `knowMapSaved=False` varre o asset de saída
+para detectar anos faltantes. Nome: `BACIA_{n}_{ano}_GTB_col11_BND_fm-v_2`.
+
+**Como rodar** — sem argumentos. Bacias processadas em `dict_bacias_process` e
+toggles no topo do arquivo (`knowMapSaved`, `VERSION`, hiperparâmetros por bacia):
+```bash
+python src/classification_process/classificacao_NotN_newBasin_Float_col10_probVC3_dict_BaY_bal.py
+```
+
+### 4. Filtros pós-classificação — `src/filter/`
+Sequência real (por bacia, 41 bandas):
+```
+Gap-fill (Step_1) → Sieve (filtersSpatial_Sieve_step2) → Temporal J3/J4/J5 (Step_3)
+   → Frequência (Step_4) → Spatial All (Step_5, produto final)
+```
+- **Gap-fill:** preenche lacunas usando a Coleção 10 como referência.
+- **Sieve:** remove manchas ≤25 px por moda, **preservando estruturas finas**
+  (rios, matas ciliares) via detecção de ponte + erosão morfológica.
+- **Temporal (unificado):** corrige oscilações de 1/2/3 anos (padrões T-!T-T,
+  T-!T-!T-T, T-!T-!T-!T-T), primeiro naturais depois antrópicas.
+- **Frequência:** estabiliza pixels naturais permanentes (Floresta >70%,
+  Savana ≥80%, Campestre >70%, Afloramento ≥75%).
+- **Spatial All:** moda de vizinhança 9×9 em pixels pouco conectados (<12).
+
+Detalhes e parâmetros em [`src/filter/README_filtros.md`](src/filter/README_filtros.md).
+
+### 5. Integração/exportação final — `src/utieis_scripts/`
+`exportarclassFinaltoMapbiomasJo_emergV2.py` gera a versão pré-integrada
+(regras 0→21, blend afloramento, Col10 24→21, máscara de bioma com buffer 5 km) e
+exporta para `projects/mapbiomas-brazil/assets/LAND-COVER/COLLECTION-11/...`.
+Utilitários: mover assets, ACL, deletar (com guarda), monitorar tasks.
+
+### 6. Validação — `src/validation/`
+- **Acurácia** (`acuracia/`): amostra os 85k pontos LAPIG sobre cada etapa
+  (`getCSVs...`, `runAll_accuracy.py`), calcula acurácia global/balanceada,
+  usuário/produtor, F1/Jaccard (macro), matriz de confusão e decomposição de erro
+  de Pontius (`newsMetrics_AccuracySamples.py`), por bacia e para a Caatinga.
+- **Área** (`area/`): `calculoAreaV3.py` calcula área por classe/ano/bacia em
+  **hectares**; `join_tables_...` consolida por modelo/versão.
+
+---
+
+## Como rodar
+
+Scripts Python via CLI. Muitos aceitam fatiamento da lista de bacias/grades:
+```bash
+# Ex.: seleção de features das bacias nas posições 0..10
+python src/features_process/feature_selection_REFCV_col11.py 0 10
+
+# Validação (GEE → CSV no Drive)
+python src/validation/acuracia/getCSVsPointstoAccGlobarlBacia_2col.py --tipo filter --filtro spatial_all --version 10 --num_class 10
+python src/validation/area/calculoAreaV3.py --tipo class --version 10 --num_class 10
+```
+Contas GEE são resolvidas por `configure_account_projects_ee.get_current_account()`
+e alternadas por `gee_tools.switch_user()`. Ferramenta de tasks/assets:
+`python src/gee_tools.py tasks -n 25`.
 
 
-## Dependencies
+## Legenda (classes)
 
-* Python 3.x
-* `earthengine-api`
-* `scikit-learn`
-* `pandas`, `numpy`
-* `tqdm`, `tabulate`
-* `gee_tools.py` (local utility module)
+Classes mapeadas na Coleção 11 / Caatinga com o código (label) e a cor
+(hexadecimal) usados no produto:
 
+![Legenda das classes da Coleção 11 — Caatinga](image/legenda_col11.png)
 
-## License
+| Classe | Label | Cor (hex) |
+|---|---|---|
+| 1.1 Formação Florestal | `3` | `#1f8d49` |
+| 1.3 Formação Savânica | `4` | `#7dc975` |
+| 2.1 Formação Campestre (Grassland) | `12` | `#d6bc74` |
+| 2.2 Formação Herbácea e Arbustiva | `77` | `#86b074` |
+| 2.5 Vegetação Herbácea de Restinga | `49` | `#ffaa5f` |
+| 2.7 Afloramento Rochoso | `29` | `#ad5100` |
+| 3.4 Mosaico de Usos | `21` | `#ffefc3` |
+| 4.6 Outras Áreas não Vegetadas | `25` | `#db4d4f` |
+| 5.1 Rio, Lago e Oceano | `33` | `#2532e4` |
 
-Distributed under **GPLv2**. Produced by **Geodatin — Dados e Geoinformação**.
+> Classes internas de validação/processo (ex.: `27` Não Observado) não fazem
+> parte da legenda do produto final.
+
+---
+
+## Bacias (49)
+
+```
+765 7544 7541 7411 746 7591 7592 761111 761112 7612 7613 7614 7615 771 7712 772
+7721 773 7741 7746 7754 7761 7764 7691 7581 7625 7584 751 752 7616 745 7424 7618
+7561 755 7617 7564 7422 76116 7671 757 766 753 764 7619 7443 7438 763 7622
+```
+
+---
+
+## Dependências
+
+```
+earthengine-api  pandas  numpy  scikit-learn  tqdm  tabulate  matplotlib
+```
+
+---
+
+## ⚠️ Notas de manutenção (código × documentação)
+
+Levantadas na revisão do repositório — detalhes na seção 9 de
+[`DESCRICAO_PROCESSO.md`](DESCRICAO_PROCESSO.md):
+
+- **Detecção de estradas** (`filtersRoads_*`, assets `ROADS/*`,
+  `reviewer_road_map_br.js`) citada no `CLAUDE.md` **não tem código** no repositório.
+- Etapas POS-CLASS `TemporalbyCC`, `EstabilidadeCols`, `correcoes`,
+  `layer_rios_finos`, `layer_afloramento` são consumidas mas **os scripts que as
+  geram não estão presentes**.
+- `README_filtros.md` descreve um pipeline legado (nomes de scripts e lógica
+  temporal desatualizados; Campestre 60% no README vs **>70%** no código).
+- Inconsistências de `version` na cadeia de filtros (Sieve V1 → Step_3 lê V3;
+  Step_4 V3 → Step_5 lê V2).
+- Formato do JSON de features diverge entre RFECV (produtor) e downsampling
+  (consumidor); na classificação a lista de features usada é fixa (`[:45]`).
+- `numberOfTrees`: 30 no script de produção vs 35 no `CLAUDE.md`.
+- `join_tables_Basin_areas...` é legado (python2, padrões Col9) — atualizar p/ Col11.
